@@ -45,27 +45,32 @@ public class FileCsv {
     }
 
     public List<Account> readFileAccount(List<Account> list, String filePath) throws Exception {
-        FileReader fileReader = new FileReader(filePath);
-        Scanner scanner = new Scanner(fileReader);
-        list.clear();
-        if (scanner.nextLine() != null) {
-            while (scanner.hasNext()) {
-                String out = scanner.nextLine();
-                String[] arr = out.split(",");
-                Account account = new Account(arr[0],arr[1],arr[2]);
+        try {
+            FileReader fileReader = new FileReader(filePath);
+            Scanner scanner = new Scanner(fileReader);
+            list.clear();
+            if (scanner.nextLine() != null) {
+                while (scanner.hasNext()) {
+                    String out = scanner.nextLine();
+                    String[] arr = out.split(",");
+                    Account account = new Account(arr[0],arr[1],arr[2]);
 
-                list.add(account);
+                    list.add(account);
+                }
+            } else {
+                throw new Exception();
             }
-        } else {
-            throw new Exception();
+        } catch (Exception e){
+
         }
+
         return list;
     }
 
     public void writeFileAccount(List<Account> list, String filePath) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String title = "TÊN ĐĂNG NHẬP,EMAIL,MẬT KHẨU\n";
+        String title = "TÊN TÀI KHOẢN,EMAIL,MẬT KHẨU\n";
         for (Account a : list) {
             title += a.getUserName() + ","
                     + a.getEmail() + ","

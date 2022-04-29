@@ -10,7 +10,7 @@ public class BeverageManagement {
     private List<Beverage> beverages = new ArrayList<>();
     public static final String BEVERAGE_FILE_PATH = "C:\\Users\\hongh\\IdeaProjects\\everage_order_management_app\\src\\data_file\\beverage.csv";
     public static final String ORDER_FILE_PATH = "C:\\Users\\hongh\\IdeaProjects\\everage_order_management_app\\src\\data_file\\order.csv";
-
+// từ order ddeerr làm gì???
     FileCsv fileCsv = new FileCsv();
     Scanner sc = new Scanner(System.in);
 
@@ -62,15 +62,18 @@ public class BeverageManagement {
     }
 
     public void totalQuantitySold(){
-
+//      tổng số đã bán
     }
 
     public void totalIncome(){
-
+//      tổng thu nhập
     }
 
     public void printAll(){
-
+        System.out.println("Danh Sách Tất Cả Các Loại Đồ Uống:");
+        for (Beverage b : beverages) {
+            System.out.println(b);
+        }
     }
 
     public void printOrderedMany(){
@@ -88,4 +91,6 @@ public class BeverageManagement {
     public int calculateThePrice(int quannity, int size){
         return 0;
     }
+
+    // hiển thị danh sách khách hàng
 }
