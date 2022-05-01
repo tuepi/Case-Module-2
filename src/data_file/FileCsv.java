@@ -9,34 +9,40 @@ import java.util.Scanner;
 
 public class FileCsv {
     public List<Beverage> readFileBeverage(List<Beverage> list, String filePath) throws Exception {
-        FileReader fileReader = new FileReader(filePath);
-        Scanner scanner = new Scanner(fileReader);
-        list.clear();
-        if (scanner.nextLine() != null) {
-            while (scanner.hasNext()) {
-                String out = scanner.nextLine();
-                String[] arr = out.split(",");
-                Beverage beverage = new Beverage(arr[0], arr[1], Double.parseDouble(arr[2]), Integer.parseInt(arr[3]), Boolean.parseBoolean(arr[4]), Boolean.parseBoolean(arr[5]), arr[6]);
+        try {
+            FileReader fileReader = new FileReader(filePath);
+            Scanner scanner = new Scanner(fileReader);
+            list.clear();
+            if (scanner.nextLine() != null) {
+                while (scanner.hasNext()) {
+                    String out = scanner.nextLine();
+                    String[] arr = out.split(",");
+                    Beverage beverage = new Beverage(arr[0], arr[1], Double.parseDouble(arr[2]), Integer.parseInt(arr[3]));
 
-                list.add(beverage);
+                    list.add(beverage);
+                }
+            } else {
+                throw new Exception();
             }
-        } else {
-            throw new Exception();
+        } catch (Exception e){
+
         }
+
         return list;
     }
 
     public void writeFileBeverage(List<Beverage> list, String filePath) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String title = "TÊN,HÌNH ẢNH,\n";
+        String title = "ID,TÊN,HÌNH MINH HỌA,GIÁ(kVNĐ),SỐ LƯỢNG,TRẠNG THÁI\n";
         for (Beverage b : list) {
             title += b.getId() + ","
                     + b.getDrinkName() + ","
                     + b.getImage() + ","
                     + b.getPrice() + ","
-                    + b.getType() + ","
-                    + b.getSweet() + ","
+                    + b.getQuantity() + ","
+//                    + b.getType() + ","
+//                    + b.getSweet() + ","
                     + b.getStatus() + "\n";
         }
         bufferedWriter.write(title);

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountManagement {
-    public static final String PLEASE_SIGN_UP = "MỜI BẠN ĐĂNG NHẬP";
+    public static final String PLEASE_SIGN_UP = "MỜI BẠN ĐĂNG KÝ";
     public static final String USER_FILE_PATH = "src\\data_file\\user.csv";
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
@@ -24,6 +24,7 @@ public class AccountManagement {
 
     FileCsv fileCsv = new FileCsv();
     ValidateAll validateAll = new ValidateAll();
+    Account account;
     Scanner scanner = new Scanner(System.in);
 
 
@@ -39,32 +40,43 @@ public class AccountManagement {
         this.accounts = accounts;
     }
 
-    public void login() {
+    public int login() {
         System.out.println("Mời bạn Đăng Nhập >>>");
         System.out.print("Nhập Email: ");
         String email = scanner.nextLine();
         System.out.print("Nhập Mật Khẩu: ");
         String password = scanner.nextLine();
+        int count = 0;
         if (email.equals("tue688i3@gmail.com") && password.equals("TranDinhTue3#")) {
+            System.out.println("---------------------------------");
             System.out.println("XIN CHÀO ÔNG CHỦ Nhà Hàng \u2615PITEU\uD83C\uDF79\"");
+            System.out.println("---------------------------------");
+
+            count = 1;
             // HIỂN THỊ MÀN HÌNH QUẢN LÝ
         } else {
             for (Account ac : accounts) {
                 if (ac.getEmail().equals(email) && ac.getPassword().equals(password)) {
+                    count = -1;
                     System.out.println("---------------------------------");
                     System.out.println(">>>ĐĂNG NHẬP THÀNH CÔNG<<<");
                     System.out.println("---------------------------------");
                     System.out.println("Chào mừng " + ac.getUserName() + " đến với Nhà Hàng \u2615PITEU\uD83C\uDF79\"");
+                    System.out.println("---------------------------------");
+                    account = new Account(ac.getUserName(), email, password);
                     //hiển thị màn hình order
-                } else {
-                    System.out.println("---------------------------------");
-                    System.out.println("ĐĂNG NHẬP THẤT BẠI!!!");
-                    System.out.println("---------------------------------");
-                    // check y thì login() còn n thì thoát ra menu đăng nhập đăng kí
-                    login();
+                    break;
                 }
             }
+            if (count == 0) {
+                System.out.println("---------------------------------");
+                System.out.println("ĐĂNG NHẬP THẤT BẠI!!!");
+                System.out.println("---------------------------------");
+                // check y thì login() còn n thì thoát ra menu đăng nhập đăng kí
+                login();
+            }
         }
+        return count;
     }
 
     public void signUp() throws IOException {
@@ -80,8 +92,7 @@ public class AccountManagement {
             for (Account a : accounts) {
                 if (a.getEmail().equals(email)) {
                     System.out.println("Email đã được sử dụng!!!\nMời nhập lại");
-                } else {
-                    break;
+                    checkEmail = false;
                 }
             }
         }
@@ -109,9 +120,35 @@ public class AccountManagement {
         }
     }
 
-    public void updateAccount() {
-        //chỉnh sửa tên và mật khẩu giữ nguyên email
+    public void printThisAccount(){
+        System.out.println("---------------------------------");
+        System.out.println("Thông tin Tài Khoản của Quý Khách là:");
+        System.out.println("Tên Tài Khoản: " + account.getUserName());
+        System.out.println("Email: " + account.getEmail());
+        System.out.println("Mật Khẩu: " + account.getPassword());
+        System.out.println("---------------------------------");
 
+    }
+
+    public void updateAccount() {
+        System.out.println("---------------------------------");
+        System.out.println("Chỉnh sửa Tên Tài Khoản thành: ");
+        String newUserName = scanner.nextLine();
+        account.setUserName(newUserName);
+        System.out.println("Chỉnh sửa Mật Khẩu thành: ");
+        String newPass = scanner.nextLine();
+        account.setPassword(newPass);
+        System.out.println("---------------------------------");
+        System.out.println("ĐÃ SỬA TÀI KHOẢN THÀNH CÔNG!!!");
+        System.out.println("---------------------------------");
+
+    }
+
+    public void printUsers(){
+        System.out.println("Danh Sách Khách Hàng: ");
+        for (Account a : accounts) {
+            System.out.println("Tên Tài Khoản: " + a.getUserName() + ", Email: " + a.getEmail());
+        }
     }
 
 }
