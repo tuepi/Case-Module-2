@@ -49,7 +49,7 @@ public class AccountManagement {
         int count = 0;
         if (email.equals("tue688i3@gmail.com") && password.equals("TranDinhTue3#")) {
             System.out.println("---------------------------------");
-            System.out.println("XIN CHÀO ÔNG CHỦ Nhà Hàng \u2615PITEU\uD83C\uDF79\"");
+            System.out.println("KÍNH CHÀO ÔNG CHỦ Nhà Hàng \u2615PITEU\uD83C\uDF79\"");
             System.out.println("---------------------------------");
 
             count = 1;
@@ -73,7 +73,6 @@ public class AccountManagement {
                 System.out.println("ĐĂNG NHẬP THẤT BẠI!!!");
                 System.out.println("---------------------------------");
                 // check y thì login() còn n thì thoát ra menu đăng nhập đăng kí
-                login();
             }
         }
         return count;

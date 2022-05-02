@@ -4,7 +4,6 @@ import data_file.FileCsv;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,11 +12,10 @@ public class BeverageManagement {
     public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
     public static final String ORDER_FILE_PATH = "src\\data_file\\order.csv";
     // từ order ddeerr làm gì???
-    FileCsv fileCsv = new FileCsv();
+
     private List<Beverage> beverages = new ArrayList<>();
-
-
-    Scanner sc = new Scanner(System.in);
+    FileCsv fileCsv = new FileCsv();
+    Scanner scanner = new Scanner(System.in);
 
     public BeverageManagement() throws Exception {
         beverages = fileCsv.readFileBeverage(beverages, BEVERAGE_FILE_PATH);
@@ -35,18 +33,18 @@ public class BeverageManagement {
 
         System.out.println("Nhập thông tin Đồ Uống mới:");
         System.out.print("Nhập tên Đồ Uống: ");
-        String drinkName = sc.nextLine();
+        String drinkName = scanner.nextLine();
         System.out.print("Chèn Hình Ảnh: ");
-        String image = sc.nextLine();
+        String image = scanner.nextLine();
         boolean check = false;
         double price = 0;
         int quanity = 0;
         do {
             try {
                 System.out.print("Nhập Giá Đồ Uống: ");
-                price = Double.parseDouble(sc.nextLine());
+                price = Double.parseDouble(scanner.nextLine());
                 System.out.print("Nhập Số Lượng: ");
-                quanity = Integer.parseInt(sc.nextLine());
+                quanity = Integer.parseInt(scanner.nextLine());
                 check = true;
             } catch (NumberFormatException i) {
                 System.out.println("Nhập sai định dạng");
@@ -62,6 +60,7 @@ public class BeverageManagement {
         beverages.add(beverage);
         fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
         System.out.println("ĐÃ THÊM ĐỒ UỐNG THÀNH CÔNG!!!");
+        System.out.println("---------------------------------");
     }
 
     public int findById(int id) {
@@ -73,56 +72,72 @@ public class BeverageManagement {
         return -1;
     }
 
-    public void editBeverage() {
+    public void editBeverage() throws IOException {
         System.out.print("Nhập ID Sản Phẩm muốn thay đổi: ");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
         // check xem có muốn sửa k?
         if (index != -1) {
             System.out.println("Sẽ thay đổi đồ uống " + beverages.get(index).getDrinkName());
             Beverage beverage = creatBeverage();
+            beverage.setId(beverages.get(index).getId());
             beverages.set(index, beverage);
+            fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
             System.out.println("ĐÃ THAY ĐỔI THÀNH CÔNG!!!");
+            System.out.println("---------------------------------");
         } else {
-            System.out.println("Không tồn tại đồ uống " + beverages.get(index).getDrinkName());
+            System.out.println("Không tồn tại đồ uống có ID = " + id);
+            System.out.println("---------------------------------");
         }
     }
 
-    public void removeBeverage() {
+    public void removeBeverage() throws IOException {
         System.out.print("Nhập ID Sản Phẩm muốn thay đổi: ");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
         if (index != -1) {
             beverages.remove(index);
+            fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
             System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
+            System.out.println("---------------------------------");
         } else {
-            System.out.println("Không tồn tại !!!");
+            System.out.println("Không tồn tại đồ uống có ID = " + id);
+            System.out.println("---------------------------------");
         }
     }
 
     public void findBeverageByName(String name) {
         int count = 0;
         for (Beverage b : beverages) {
-            if (b.getDrinkName().contains(name)) {
+            if (b.getDrinkName().toLowerCase().contains(name)) {
+                System.out.println("Sản Phẩm cần tìm là: ");
                 System.out.println(b);
+                System.out.println("---------------------------------");
                 count++;
             }
         }
         if (count == 0) {
-            System.out.println("Không tìm thấy!!!");
+            System.out.println("Không tìm thấy Sản Phẩm có tên " + name);
+            System.out.println("---------------------------------");
         }
     }
 
-    public void updateStatus(int id) {
+    public void updateStatusByQuanity() throws IOException {
 //     update số lượng chỉnh sửa số lượng
-    }
-
-    public void totalQuantitySold() {
-//      tổng số đã bán theo order
-    }
-
-    public void totalIncome() {
-//      tổng thu nhập
+        System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
+        int id = Integer.parseInt(scanner.nextLine());
+        int index = findById(id);
+        if (index != -1){
+            System.out.print("Số lượng Sản Phẩm mới là: ");
+            int newQuanity = Integer.parseInt(scanner.nextLine());
+            beverages.get(index).setQuantity(newQuanity);
+            fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
+            System.out.println("ĐÃ SỬA THÀNH CÔNG!!!");
+            System.out.println("---------------------------------");
+        } else {
+            System.out.println("Không tồn tại đồ uống có ID = " + id);
+            System.out.println("---------------------------------");
+        }
     }
 
     public void printAll() {
@@ -131,29 +146,21 @@ public class BeverageManagement {
             for (Beverage b : beverages) {
                 System.out.println(b);
             }
+            System.out.println("---------------------------------");
         } else {
             System.out.println("Danh Sách Trống!!!");
+            System.out.println("---------------------------------");
         }
-    }
-
-    public void printOrderedMany() {
-
     }
 
     public void printByUser() {
 //      danh sách mà 1 khách đã mua
-    }
-
-    public void order() {
 
     }
 
-    public int calculateThePrice(int quannity, int size) {
-        return 0;
-    }
 
-    // hiển thị danh sách khách hàng
-    public void printUsers(){
 
-    }
+
+
+
 }

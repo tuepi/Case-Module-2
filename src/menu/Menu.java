@@ -19,7 +19,7 @@ public class Menu {
             7.    DANH SÁCH KHÁCH HÀNG
             8.    DANH SÁCH ĐỒ UỐNG ĐÃ BÁN
             9.    THU NHẬP
-            0.          >>>THOÁT<<<
+            0.         >>>ĐĂNG XUẤT<<<
             """;
 
     String userOfMenu = """
@@ -39,6 +39,6 @@ public class Menu {
             3.  SẮP XẾP THEO MỨC ĐỘ YÊU THÍCH
             4.     THEO LỊCH SỬ ĐẶT HÀNG
             5.       TÌM KIẾM THEO TÊN
-            0.          >>>THOÁT<<<
+            0.         >>>TRỞ LẠI<<<
             """;
 }

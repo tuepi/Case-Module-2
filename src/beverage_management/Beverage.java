@@ -4,11 +4,11 @@ public class Beverage {
     private int id;
     private String drinkName;
     private String image;
-//    private boolean size;
+    private boolean size;
     private double price;
     private int quantity;
-//    private boolean type; // nóng - lạnh
-//    private boolean sweet; // ngọt - không ngọt
+    private boolean type; // nóng - lạnh
+    private boolean sweet; // ngọt - không ngọt
     private String status; // còn - hết
 
     public Beverage() {
@@ -24,11 +24,11 @@ public class Beverage {
     public Beverage(String drinkName, String image,boolean size, double price, int quantity, boolean type, boolean sweet, String status) {
         this.drinkName = drinkName;
         this.image = image;
-//        this.size = size;
+        this.size = size;
         this.price = price;
         this.quantity = quantity;
-//        this.type = type;
-//        this.sweet = sweet;
+        this.type = type;
+        this.sweet = sweet;
         this.status = status;
     }
 
@@ -56,25 +56,25 @@ public class Beverage {
         this.image = image;
     }
 
-//    public boolean isSize() {
-//        return size;
-//    }
+    public boolean isSize() {
+        return size;
+    }
 
-//    public void setSize(boolean size) {
-//        this.size = size;
-//    }
+    public void setSize(boolean size) {
+        this.size = size;
+    }
 
     public double getPrice() {
         return price;
     }
 
-//    public double getPriceBySize() {
-//        if (isSize()){
-//            return this.price;
-//        } else {
-//            return this.price * 1.5;
-//        }
-//    }
+    public double getPriceBySize() {
+        if (isSize()){
+            return this.price;
+        } else {
+            return this.price * 1.5;
+        }
+    }
 
     public void setPrice(double price) {
         this.price = price;
@@ -88,33 +88,33 @@ public class Beverage {
         this.quantity = quantity;
     }
 
-//    public boolean isType() {
-//        return type;
-//    }
-//
-//    public void setType(boolean type) {
-//        this.type = type;
-//    }
-//
-//    public String getType(){
-//        if (isType()){
-//            return "Lạnh";
-//        } return "Nóng";
-//    }
+    public boolean isType() {
+        return type;
+    }
 
-//    public boolean isSweet() {
-//        return sweet;
-//    }
-//
-//    public void setSweet(boolean sweet) {
-//        this.sweet = sweet;
-//    }
-//
-//    public String getSweet(){
-//        if (isSweet()){
-//            return "Ngọt";
-//        } return "Không Ngọt";
-//    }
+    public void setType(boolean type) {
+        this.type = type;
+    }
+
+    public String getType(){
+        if (isType()){
+            return "Lạnh";
+        } return "Nóng";
+    }
+
+    public boolean isSweet() {
+        return sweet;
+    }
+
+    public void setSweet(boolean sweet) {
+        this.sweet = sweet;
+    }
+
+    public String getSweet(){
+        if (isSweet()){
+            return "Ngọt";
+        } return "Không Ngọt";
+    }
 
     public String getStatus() {
         if (getQuantity() != 0){
@@ -134,11 +134,11 @@ public class Beverage {
     @Override
     public String toString() {
         return "Đồ Uống {"
-                + id + ", "
+                + "ID = " + id + ", "
                 + drinkName + ", "
                 + image + ", "
-                + price + ", "
-                + quantity + ", "
+                + price + "kVNĐ, "
+//                + quantity + ", "
 //                + getType() + ", "
 //                + getSweet() + ", "
                 + getStatus() +

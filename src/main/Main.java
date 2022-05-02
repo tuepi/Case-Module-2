@@ -9,18 +9,21 @@ import menu.HandleMenu;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        BeverageManagement b = new BeverageManagement();
         AccountManagement a = new AccountManagement();
         Account account = new Account();
 
         FileCsv fileCsv = new FileCsv();
         Beverage beverage = new Beverage();
-        BeverageManagement b = new BeverageManagement();
+
         HandleMenu handleMenu = new HandleMenu();
 
-        handleMenu.showMenuLoginAndSignUp();
+//        handleMenu.showMenuLoginAndSignUp();
 //           Beverage bb = b.creatBeverage();
 //           b.addBeverage();
-//        b.printAll();
+        b.printAll();
+        b.editBeverage();
+        b.printAll();
 //        a.signUp();
 //
     }

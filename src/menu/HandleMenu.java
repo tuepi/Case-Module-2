@@ -30,7 +30,7 @@ public class HandleMenu {
                         if (check == 1){
                             showMenuManage();
                         }
-                        else if (check == -1){
+                        else if (check == -1) {
                             showMenuUser();
                         }
                         break;
@@ -39,6 +39,7 @@ public class HandleMenu {
                         showMenuLoginAndSignUp();
                         break;
                     case 0:
+                        System.out.println("CẢM ƠN VÀ HẸN GẶP LẠI!!!");
                         System.exit(0);
                     default:
                         System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");
@@ -54,49 +55,53 @@ public class HandleMenu {
         System.out.println(menu.managementMenu);
         int choice = -1;
         do {
-            System.out.print("Nhập lựa chọn: ");
-            choice = Integer.parseInt(scanner.nextLine());
-            switch (choice){
-                case 1:
-                    beverageManagement.printAll();
-                    showMenuManage();
-                    break;
-                case 2:
-                    beverageManagement.addBeverage();
-                    showMenuManage();
-                    break;
-                case 3:
-                    beverageManagement.editBeverage();
-                    showMenuManage();
-                    break;
-                case 4:
-                    beverageManagement.removeBeverage();
-                    showMenuManage();
-                    break;
-                case 5:
+            try {
+                System.out.print("Nhập lựa chọn: ");
+                choice = Integer.parseInt(scanner.nextLine());
+                switch (choice){
+                    case 1:
+                        beverageManagement.printAll();
+                        showMenuManage();
+                        break;
+                    case 2:
+                        beverageManagement.addBeverage();
+                        showMenuManage();
+                        break;
+                    case 3:
+                        beverageManagement.editBeverage();
+                        showMenuManage();
+                        break;
+                    case 4:
+                        beverageManagement.removeBeverage();
+                        showMenuManage();
+                        break;
+                    case 5:
 
-                    break;
-                case 6:
-                    System.out.print("Nhập Tên Sản Phẩm muốn tìm kiếm: ");
-                    String name = scanner.nextLine();
-                    beverageManagement.findBeverageByName(name);
-                    showMenuManage();
-                    break;
-                case 7:
-                    accountManagement.printUsers();
-                    showMenuManage();
-                    break;
-                case 8:
+                        break;
+                    case 6:
+                        System.out.print("Nhập Tên Sản Phẩm muốn tìm kiếm: ");
+                        String name = scanner.nextLine().toLowerCase();
+                        beverageManagement.findBeverageByName(name);
+                        showMenuManage();
+                        break;
+                    case 7:
+                        accountManagement.printUsers();
+                        showMenuManage();
+                        break;
+                    case 8:
 
-                    break;
-                case 9:
+                        break;
+                    case 9:
 
-                    break;
-                case 0:
-                    showMenuLoginAndSignUp();
-                    break;
-                default:
-                    System.out.println("Yêu cầu lựa chọn từ 0 > 9 : ");
+                        break;
+                    case 0:
+                        showMenuLoginAndSignUp();
+                        break;
+                    default:
+                        System.out.println("Yêu cầu lựa chọn từ 0 > 9 : ");
+                }
+            } catch (Exception e){
+                System.out.println("Yêu cầu lựa chọn từ 0 > 9 : ");
             }
         } while (choice < 0 || choice > 9);
 
@@ -152,7 +157,7 @@ public class HandleMenu {
                     showMenuUser();
                     break;
                 default:
-                    System.out.println("Yêu cầu lựa chọn từ 0 > 5 : ");
+
             }
         } while (choice < 0 || choice > 5);
 

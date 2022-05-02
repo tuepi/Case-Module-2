@@ -17,8 +17,8 @@ public class FileCsv {
                 while (scanner.hasNext()) {
                     String out = scanner.nextLine();
                     String[] arr = out.split(",");
-                    Beverage beverage = new Beverage(arr[0], arr[1], Double.parseDouble(arr[2]), Integer.parseInt(arr[3]));
-
+                    Beverage beverage = new Beverage(arr[1],arr[2], Double.parseDouble(arr[3]), Integer.parseInt(arr[4]));
+                    beverage.setId(list.size() + 1);
                     list.add(beverage);
                 }
             } else {
@@ -41,8 +41,6 @@ public class FileCsv {
                     + b.getImage() + ","
                     + b.getPrice() + ","
                     + b.getQuantity() + ","
-//                    + b.getType() + ","
-//                    + b.getSweet() + ","
                     + b.getStatus() + "\n";
         }
         bufferedWriter.write(title);
