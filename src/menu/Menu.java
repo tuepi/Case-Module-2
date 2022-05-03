@@ -40,5 +40,5 @@ public class Menu {
             4.     THEO LỊCH SỬ ĐẶT HÀNG
             5.       TÌM KIẾM THEO TÊN
             0.         >>>TRỞ LẠI<<<
-            """;
+            """; // chuyển vào phần trang chủ
 }

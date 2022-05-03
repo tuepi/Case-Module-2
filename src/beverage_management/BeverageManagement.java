@@ -4,6 +4,7 @@ import data_file.FileCsv;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class BeverageManagement {
     private List<Beverage> beverages = new ArrayList<>();
     FileCsv fileCsv = new FileCsv();
     Scanner scanner = new Scanner(System.in);
+    String answer;
 
     public BeverageManagement() throws Exception {
         beverages = fileCsv.readFileBeverage(beverages, BEVERAGE_FILE_PATH);
@@ -92,14 +94,21 @@ public class BeverageManagement {
     }
 
     public void removeBeverage() throws IOException {
-        System.out.print("Nhập ID Sản Phẩm muốn thay đổi: ");
+        System.out.print("Nhập ID Sản Phẩm muốn xóa: ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
         if (index != -1) {
-            beverages.remove(index);
-            fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
-            System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
-            System.out.println("---------------------------------");
+            System.out.println("Bạn chắc chắn muốn xóa Sản Phẩm: " + beverages.get(index) + "?");
+            do {
+                System.out.print("Nhập lựa chọn để tiếp tục (Y/N) >>> ");
+                answer = scanner.nextLine();
+                if (answer.equals("y")) {
+                    beverages.remove(index);
+                    fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
+                    System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
+                    System.out.println("---------------------------------");
+                }
+            } while (!answer.equals("y") && !answer.equals("n"));
         } else {
             System.out.println("Không tồn tại đồ uống có ID = " + id);
             System.out.println("---------------------------------");
@@ -127,7 +136,7 @@ public class BeverageManagement {
         System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
-        if (index != -1){
+        if (index != -1) {
             System.out.print("Số lượng Sản Phẩm mới là: ");
             int newQuanity = Integer.parseInt(scanner.nextLine());
             beverages.get(index).setQuantity(newQuanity);
@@ -153,14 +162,14 @@ public class BeverageManagement {
         }
     }
 
+    public void sortByPrice(){
+        Collections.sort(this.beverages);
+    }
+
     public void printByUser() {
 //      danh sách mà 1 khách đã mua
 
     }
-
-
-
-
 
 
 }

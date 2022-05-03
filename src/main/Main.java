@@ -4,6 +4,7 @@ import account_management.Account;
 import account_management.AccountManagement;
 import beverage_management.Beverage;
 import beverage_management.BeverageManagement;
+import beverage_management.OrderManagement;
 import data_file.FileCsv;
 import menu.HandleMenu;
 
@@ -17,13 +18,16 @@ public class Main {
         Beverage beverage = new Beverage();
 
         HandleMenu handleMenu = new HandleMenu();
+        OrderManagement orderManagement = new OrderManagement();
 
+        orderManagement.order();
 //        handleMenu.showMenuLoginAndSignUp();
 //           Beverage bb = b.creatBeverage();
 //           b.addBeverage();
-        b.printAll();
-        b.editBeverage();
-        b.printAll();
+//        b.printAll();
+//        b.editBeverage();
+//        b.removeBeverage();
+//        b.printAll();
 //        a.signUp();
 //
     }

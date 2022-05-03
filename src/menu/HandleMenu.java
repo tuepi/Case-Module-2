@@ -13,6 +13,7 @@ public class HandleMenu {
     AccountManagement accountManagement = new AccountManagement();
     BeverageManagement beverageManagement = new BeverageManagement();
     Scanner scanner = new Scanner(System.in);
+    String answer;
 
     public HandleMenu() throws Exception {
     }
@@ -64,7 +65,12 @@ public class HandleMenu {
                         showMenuManage();
                         break;
                     case 2:
-                        beverageManagement.addBeverage();
+                        do {
+                            beverageManagement.addBeverage();
+                            do {System.out.print("Bạn có muốn tiếp tục thêm (Y/N) >>> ");
+                                answer = scanner.nextLine();
+                            } while (!answer.equals("y") && !answer.equals("n"));
+                        } while (answer.equals("y"));
                         showMenuManage();
                         break;
                     case 3:
@@ -132,7 +138,7 @@ public class HandleMenu {
                 default:
                     System.out.println("Yêu cầu lựa chọn từ 0 > 3 : ");
             }
-        } while (choice1 < 0 || choice1 > 4);
+        } while (choice1 < 0 || choice1 > 3);
     }
 
     public void showMenuOrder() throws Exception {

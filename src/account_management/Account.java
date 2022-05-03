@@ -4,6 +4,7 @@ public class Account {
     private String userName;
     private String email;
     private String password;
+    //thêm số điện thoại
 
     public Account() {
     }
