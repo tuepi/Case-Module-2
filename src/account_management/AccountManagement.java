@@ -1,5 +1,6 @@
 package account_management;
 
+import beverage_management.OrderedBeverage;
 import data_file.FileCsv;
 import validate.DetailValidate;
 import validate.ValidateAll;
@@ -24,9 +25,17 @@ public class AccountManagement {
 
     FileCsv fileCsv = new FileCsv();
     ValidateAll validateAll = new ValidateAll();
-    Account account;
+    OrderedBeverage orderedBeverage = new OrderedBeverage();
+    public static Account account;
     Scanner scanner = new Scanner(System.in);
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public AccountManagement() throws Exception {
         fileCsv.readFileAccount(accounts, USER_FILE_PATH);
@@ -46,6 +55,7 @@ public class AccountManagement {
         String email = scanner.nextLine();
         System.out.print("Nhập Mật Khẩu: ");
         String password = scanner.nextLine();
+
         int count = 0;
         if (email.equals("tue688i3@gmail.com") && password.equals("TranDinhTue3#")) {
             System.out.println("---------------------------------");
@@ -64,6 +74,7 @@ public class AccountManagement {
                     System.out.println("Chào mừng " + ac.getUserName() + " đến với Nhà Hàng \u2615PITEU\uD83C\uDF79\"");
                     System.out.println("---------------------------------");
                     account = new Account(ac.getUserName(), email, password);
+                    orderedBeverage.setAccount(account);
                     //hiển thị màn hình order
                     break;
                 }
@@ -72,7 +83,6 @@ public class AccountManagement {
                 System.out.println("---------------------------------");
                 System.out.println("ĐĂNG NHẬP THẤT BẠI!!!");
                 System.out.println("---------------------------------");
-                // check y thì login() còn n thì thoát ra menu đăng nhập đăng kí
             }
         }
         return count;

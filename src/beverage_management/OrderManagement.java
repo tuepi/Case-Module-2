@@ -1,5 +1,9 @@
 package beverage_management;
 
+import account_management.AccountManagement;
+import data_file.FileCsv;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,9 +11,13 @@ import java.util.Scanner;
 public class OrderManagement {
     public static final String ORDER_FILE_PATH = "src\\data_file\\order.csv";
 
+    AccountManagement accountManagement = new AccountManagement();
+
     BeverageManagement beverageManagement = new BeverageManagement();
-    private List<Beverage> orderedList = new ArrayList<>();
-    private List<Beverage> orderingList = new ArrayList<>();
+    FileCsv fileCsv = new FileCsv();
+
+    private List<OrderedBeverage> orderedList = new ArrayList<>();
+    private List<OrderedBeverage> orderingList = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -17,15 +25,15 @@ public class OrderManagement {
         // đọc file
     }
 
-    public List<Beverage> getOrderedList() {
+    public List<OrderedBeverage> getOrderedList() {
         return orderedList;
     }
 
-    public void setOrderedList(List<Beverage> orderedList) {
+    public void setOrderedList(List<OrderedBeverage> orderedList) {
         this.orderedList = orderedList;
     }
 
-    public void order() {
+    public void order() throws IOException {
         // Sau khi hiển thị danh sách
         do {
             System.out.print("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
@@ -38,13 +46,11 @@ public class OrderManagement {
                     do {
                         System.out.print("Nhập số lượng: ");
                         int orderQuanity = Integer.parseInt(sc.nextLine());
-                        int newQuanity = beverage.getQuantity();
                         if (orderQuanity > 0 && orderQuanity <= beverage.getQuantity()) {
-                            beverage.setQuantity(newQuanity = beverage.getQuantity() - orderQuanity);
                             String size = null;
                             String type = null;
                             String sweet = null;
-                            String answer ;
+                            String answer = null;
                             double total = 0;
 
                             System.out.println("Chọn size:");
@@ -104,26 +110,34 @@ public class OrderManagement {
                                 }
                             } while (choiceOfSweet != 1 && choiceOfSweet != 2);
 
-                            Beverage beverageOrder = new Beverage(id, beverage.getDrinkName(), beverage.getImage(), size, beverage.getPrice(), beverage.getQuantity(), orderQuanity, type, sweet, beverage.getStatus());
-                            orderingList.add(beverageOrder);
+                            OrderedBeverage orderedBeverage
+                                    = new OrderedBeverage(id,beverage.getDrinkName(), beverage.getImage(),
+                                    beverage.getPrice(), beverage.getQuantity(), size, orderQuanity, type, sweet, total, accountManagement.getAccount());
+                            orderingList.add(orderedBeverage);
                             // add vào list order và vào file gồm tên khách hàng và các thông tin khác
-                            System.out.println("Quý Khách vừa thêm vào giỏ sản phẩm: " + beverageOrder.printOrder());
-                            while (true){
-                                System.out.print("Quý Khách có muốn tiếp tục đặt thêm Đồ Uống khác??? (Y/N) >>> ");
-                                answer = sc.nextLine().trim().toLowerCase();
-                                if (answer.equals("y")){
-                                    order();
-                                }
-                                if (answer.equals("n")){
-                                    System.out.println("Đơn Hàng của Quý Khách: ");
-                                    for (Beverage b : orderingList) {
-                                        System.out.println(" Sản Phẩm: " + b.printOrder());
-                                        total += (b.getPriceBySize() * b.getOrderQuanity());
+                            System.out.println("Quý Khách vừa thêm vào giỏ sản phẩm:\n\t\t\t" + orderedBeverage);
+                            int newQuanity = beverage.getQuantity() - orderQuanity;
+                            beverage.setQuantity(newQuanity);
+                            fileCsv.writeFileBeverage(beverageManagement.getBeverages(), "src\\data_file\\beverage.csv");
+                                do {
+                                    System.out.print("Quý Khách có muốn tiếp tục đặt thêm Đồ Uống khác??? (Y/N) >>> ");
+                                    answer = sc.nextLine().trim().toLowerCase();
+                                    if (answer.equals("y")){
+                                        order();
                                     }
-                                    System.out.println("Tổng Hóa Đơn cần thanh toán là: " + total + "kVNĐ.");
-                                    break;
-                                }
-                            }
+                                    if (answer.equals("n")){
+                                        System.out.println("Đơn Hàng của Quý Khách: ");
+                                        for (OrderedBeverage ob : orderingList) {
+                                            System.out.println("\t\t\tSản Phẩm: " + ob);
+                                            total += (ob.getPriceBySize() * ob.getOrderQuanity());
+                                        }
+                                        System.out.println("Tổng Hóa Đơn cần thanh toán là: " + total + "kVNĐ.");
+                                        //check thanh toán
+                                        //sau thanh toán thì thêm vào list
+                                        return;
+                                    }
+                                } while (!answer.equals("y") && !answer.equals("n"));
+                                break;
                         } else {
                             System.out.println("Số Lượng vừa nhập không hợp lệ!!!\nVui lòng nhập lại >>>");
                         }
@@ -137,11 +151,6 @@ public class OrderManagement {
             }
         } while (true);
 
-        // Số lượng đặt hàng >>>  count của List ++;
-        // size
-        //type nóng lạnh
-        //sweet ngọt không ngọt
-        // hiển thị giá (Hiển thị đơn hàng)
         // yêu cầu thanh toán
     }
 

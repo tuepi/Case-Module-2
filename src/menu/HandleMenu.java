@@ -3,6 +3,7 @@ package menu;
 import account_management.Account;
 import account_management.AccountManagement;
 import beverage_management.BeverageManagement;
+import beverage_management.OrderManagement;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -12,6 +13,7 @@ public class HandleMenu {
     Menu menu = new Menu();
     AccountManagement accountManagement = new AccountManagement();
     BeverageManagement beverageManagement = new BeverageManagement();
+    OrderManagement orderManagement = new OrderManagement();
     Scanner scanner = new Scanner(System.in);
     String answer;
 
@@ -27,13 +29,7 @@ public class HandleMenu {
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        int check = accountManagement.login();
-                        if (check == 1){
-                            showMenuManage();
-                        }
-                        else if (check == -1) {
-                            showMenuUser();
-                        }
+                        checkLogin();
                         break;
                     case 2:
                         accountManagement.signUp();
@@ -45,11 +41,33 @@ public class HandleMenu {
                     default:
                         System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");
             }
         } while (choice < 0 || choice > 2);
 
+    }
+
+    public void checkLogin() throws Exception {
+        int check = accountManagement.login();
+        if (check == 1){
+            showMenuManage();
+        }
+        else if (check == -1) {
+            showMenuUser();
+        } else {
+            do {
+                System.out.println("Quý khách muốn tiếp tục đăng nhập (Y/N) ???");
+                System.out.print("Nhập lựa chọn >>> ");
+                answer = scanner.nextLine();
+                if (answer.equals("y")){
+                    checkLogin();
+                }
+                if (answer.equals("n")){
+                    showMenuLoginAndSignUp();
+                }
+            } while (!answer.equals("y") && !answer.equals("n"));
+        }
     }
 
     public void showMenuManage() throws Exception {
@@ -122,6 +140,7 @@ public class HandleMenu {
             switch (choice1) {
                 case 1:
                     System.out.println(menu.orderMenu);
+                    orderManagement.order();
 
                     break;
                 case 2:

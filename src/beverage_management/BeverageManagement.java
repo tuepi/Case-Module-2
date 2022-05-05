@@ -131,14 +131,14 @@ public class BeverageManagement {
         }
     }
 
-    public void updateStatusByQuanity() throws IOException {
+    public void updateStatusByQuanity(int newQuanity) throws IOException {
 //     update số lượng chỉnh sửa số lượng
         System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
         if (index != -1) {
             System.out.print("Số lượng Sản Phẩm mới là: ");
-            int newQuanity = Integer.parseInt(scanner.nextLine());
+            newQuanity = Integer.parseInt(scanner.nextLine());
             beverages.get(index).setQuantity(newQuanity);
             fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
             System.out.println("ĐÃ SỬA THÀNH CÔNG!!!");

@@ -2,6 +2,7 @@ package data_file;
 
 import account_management.Account;
 import beverage_management.Beverage;
+import beverage_management.OrderedBeverage;
 
 import java.io.*;
 import java.util.List;
@@ -27,7 +28,6 @@ public class FileCsv {
         } catch (Exception e){
 
         }
-
         return list;
     }
 
@@ -42,6 +42,49 @@ public class FileCsv {
                     + b.getPrice() + ","
                     + b.getQuantity() + ","
                     + b.getStatus() + "\n";
+        }
+        bufferedWriter.write(title);
+        bufferedWriter.close();
+        fileWriter.close();
+    }
+
+    public List<OrderedBeverage> readFileOrder(List<OrderedBeverage> orderedList, String filePath) throws Exception {
+        try {
+            FileReader fileReader = new FileReader(filePath);
+            Scanner scanner = new Scanner(fileReader);
+            orderedList.clear();
+            if (scanner.nextLine() != null) {
+                while (scanner.hasNext()) {
+                    String out = scanner.nextLine();
+                    String[] arr = out.split(",");
+                    OrderedBeverage orderedBeverage = new OrderedBeverage();
+                    orderedBeverage.setId(orderedList.size() + 1);
+                    orderedList.add(orderedBeverage);
+                }
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e){
+
+        }
+
+        return orderedList;
+    }
+
+    public void writeFileOrder(List<OrderedBeverage> orderedList, String filePath) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        String title = "ID,TÊN,HÌNH MINH HỌA,SIZE,KIỂU,ĐỘ NGỌT,SỐ LƯỢNG,TỔNG(kVNĐ),TÊN KHÁCH HÀNG\n";
+        for (OrderedBeverage ob : orderedList) {
+            title += ob.getId() + ","
+                    + ob.getDrinkName() + ","
+                    + ob.getImage() + ","
+                    + ob.getSize() + ","
+                    + ob.getType() + ","
+                    + ob.getSweet() + ","
+                    + ob.getOrderQuanity() + ","
+                    + ob.getTotalPrice() + ","
+                    + ob.getAccount().getUserName() + "\n";
         }
         bufferedWriter.write(title);
         bufferedWriter.close();

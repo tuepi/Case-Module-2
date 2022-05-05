@@ -20,10 +20,11 @@ public class Main {
         HandleMenu handleMenu = new HandleMenu();
         OrderManagement orderManagement = new OrderManagement();
 
-        orderManagement.order();
-//        handleMenu.showMenuLoginAndSignUp();
+//        orderManagement.order();
+        handleMenu.showMenuLoginAndSignUp();
 //           Beverage bb = b.creatBeverage();
 //           b.addBeverage();
+//        fileCsv.readFileBeverage(b.getBeverages(),"src\\data_file\\beverage.csv");
 //        b.printAll();
 //        b.editBeverage();
 //        b.removeBeverage();
