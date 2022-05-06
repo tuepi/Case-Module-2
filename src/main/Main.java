@@ -20,9 +20,12 @@ public class Main {
         HandleMenu handleMenu = new HandleMenu();
         OrderManagement orderManagement = new OrderManagement();
 
+
+//        fileCsv.readFileOrder(orderManagement.getOrderedList(), "src\\data_file\\order.csv");
 //        orderManagement.order();
-        handleMenu.showMenuLoginAndSignUp();
-//           Beverage bb = b.creatBeverage();
+//        orderManagement.payment();
+//         handleMenu.showMenuLoginAndSignUp();
+         //           Beverage bb = b.creatBeverage();
 //           b.addBeverage();
 //        fileCsv.readFileBeverage(b.getBeverages(),"src\\data_file\\beverage.csv");
 //        b.printAll();
@@ -31,5 +34,7 @@ public class Main {
 //        b.printAll();
 //        a.signUp();
 //
+        orderManagement.printAllOrdered();
+        orderManagement.totalRevenue();
     }
 }

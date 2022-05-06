@@ -35,6 +35,13 @@ public class Beverage implements Comparable<Beverage> {
         this.status = status;
     }
 
+    public Beverage(int id, String drinkName, String image, double price) {
+        this.id = id;
+        this.drinkName = drinkName;
+        this.image = image;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

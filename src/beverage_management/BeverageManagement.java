@@ -50,7 +50,7 @@ public class BeverageManagement {
                 check = true;
             } catch (NumberFormatException i) {
                 System.out.println("Nhập sai định dạng");
-
+                creatBeverage();
             }
         } while (!check);
         return new Beverage(drinkName, image, price, quanity);

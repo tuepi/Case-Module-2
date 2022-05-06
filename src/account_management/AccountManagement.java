@@ -123,7 +123,6 @@ public class AccountManagement {
                 Account account = new Account(userName, email, password);
                 accounts.add(account);
                 fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
-                //hiển thị menu đăng nhập
                 break;
             }
         }
@@ -136,7 +135,6 @@ public class AccountManagement {
         System.out.println("Email: " + account.getEmail());
         System.out.println("Mật Khẩu: " + account.getPassword());
         System.out.println("---------------------------------");
-
     }
 
     public void updateAccount() {
@@ -150,6 +148,32 @@ public class AccountManagement {
         System.out.println("---------------------------------");
         System.out.println("ĐÃ SỬA TÀI KHOẢN THÀNH CÔNG!!!");
         System.out.println("---------------------------------");
+
+    }
+
+    public Account findByEmail(String userName){
+        int index = findIndexByUserName(userName);
+        if (index != -1){
+            return accounts.get(index);
+        } else {
+            System.out.println("Không tìm thấy!!!");
+            return null;
+        }
+    }
+
+    public int findIndexByUserName(String userName) {
+
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getUserName().equals(userName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+
+    public void remove(){
 
     }
 

@@ -4,6 +4,7 @@ public class Account {
     private String userName;
     private String email;
     private String password;
+    private String phoneNumber;
 
     //thêm số điện thoại
 
@@ -38,6 +39,14 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

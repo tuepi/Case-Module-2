@@ -36,7 +36,7 @@ public class HandleMenu {
                         showMenuLoginAndSignUp();
                         break;
                     case 0:
-                        System.out.println("CẢM ƠN VÀ HẸN GẶP LẠI!!!");
+                        System.out.println("CẢM ƠN VÀ HẸN GẶP LẠI QUÝ KHÁCH!!!");
                         System.exit(0);
                     default:
                         System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");

@@ -25,11 +25,14 @@ public class OrderedBeverage extends Beverage{
         this.account = account;
     }
 
-    public OrderedBeverage(String size, int orderQuanity, String type, String sweet, double totalPrice, Account account) {
+    public OrderedBeverage(int id, String drinkName, String image,double price, String size,
+                           String type, String sweet, int orderQuanity, double totalPrice, Account account) {
+        super(id, drinkName, image, price);
         this.size = size;
-        this.orderQuanity = orderQuanity;
+
         this.type = type;
         this.sweet = sweet;
+        this.orderQuanity = orderQuanity;
         this.totalPrice = totalPrice;
         this.account = account;
     }
@@ -67,7 +70,7 @@ public class OrderedBeverage extends Beverage{
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        return getPriceBySize() * getOrderQuanity();
     }
 
     public void setTotalPrice(double totalPrice) {
@@ -100,9 +103,9 @@ public class OrderedBeverage extends Beverage{
                 + getImage() + ", "
                 + size + ", "
                 + type + ", "
-                + sweet
-                + "}\n\t\t\tSố Lượng đặt mua: " + orderQuanity
-                + " sản phẩm, Giá: " + getPriceBySize() + " kVNĐ, "
-                + "Khách Hàng: " + getAccount().getUserName();
+                + sweet + " , Giá: " + getPriceBySize() + " kVNĐ"
+                + "}\n\t\tSố Lượng đặt mua: " + orderQuanity + " sản phẩm, "
+                + "Tổng Thanh Toán: " + getTotalPrice() + " kVNĐ, "
+                + "Khách Hàng: " + account.getUserName();
     }
 }
