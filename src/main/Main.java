@@ -32,9 +32,10 @@ public class Main {
 //        b.editBeverage();
 //        b.removeBeverage();
 //        b.printAll();
-//        a.signUp();
-//
-        orderManagement.printAllOrdered();
-        orderManagement.totalRevenue();
+//        a.printUsers();
+//        a.removeAccount();
+//        a.printUsers();
+
+        orderManagement.printOrderedMany();
     }
 }

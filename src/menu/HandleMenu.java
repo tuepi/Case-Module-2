@@ -100,12 +100,11 @@ public class HandleMenu {
                         showMenuManage();
                         break;
                     case 5:
-
+                        beverageManagement.updateStatusByQuanity();
+                        showMenuManage();
                         break;
                     case 6:
-                        System.out.print("Nhập Tên Sản Phẩm muốn tìm kiếm: ");
-                        String name = scanner.nextLine().toLowerCase();
-                        beverageManagement.findBeverageByName(name);
+                        beverageManagement.findBeverageByName();
                         showMenuManage();
                         break;
                     case 7:
@@ -113,10 +112,12 @@ public class HandleMenu {
                         showMenuManage();
                         break;
                     case 8:
-
+                        orderManagement.printAllOrdered();
+                        showMenuManage();
                         break;
                     case 9:
-
+                        orderManagement.totalRevenue();
+                        showMenuManage();
                         break;
                     case 0:
                         showMenuLoginAndSignUp();
@@ -132,6 +133,7 @@ public class HandleMenu {
     }
 
     public void showMenuUser() throws Exception {
+        beverageManagement.printAll();
         System.out.println(menu.userOfMenu);
         int choice1 = -1;
         do {
@@ -139,53 +141,38 @@ public class HandleMenu {
             choice1 = Integer.parseInt(scanner.nextLine());
             switch (choice1) {
                 case 1:
-                    System.out.println(menu.orderMenu);
                     orderManagement.order();
-
+                    showMenuUser();
                     break;
                 case 2:
-                    accountManagement.printThisAccount();
+                    beverageManagement.sortByPrice();
                     showMenuUser();
                     break;
                 case 3:
+                    // theo order theo số lượng
+                    break;
+                case 4:
+                    // theo order và tên khách TRONG LỚP ORDER
+                    break;
+                case 5:
+                    beverageManagement.findBeverageByName();
+                    showMenuUser();
+                    break;
+                case 6:
+                    accountManagement.printThisAccount();
+                    showMenuUser();
+                    break;
+                case 7:
                     accountManagement.updateAccount();
                     showMenuUser();
                     break;
                 case 0:
+                    System.out.println("TẠM BIỆT QUÝ KHÁCH");
                     showMenuLoginAndSignUp();
                     break;
                 default:
                     System.out.println("Yêu cầu lựa chọn từ 0 > 3 : ");
             }
         } while (choice1 < 0 || choice1 > 3);
-    }
-
-    public void showMenuOrder() throws Exception {
-        int choice = -1;
-        do {
-            System.out.println(menu.orderMenu);
-            System.out.println("Nhập lựa chọn: ");
-            choice = Integer.parseInt(scanner.nextLine());
-            switch (choice){
-                case 1:
-
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 0:
-                    showMenuUser();
-                    break;
-                default:
-
-            }
-        } while (choice < 0 || choice > 5);
-
-
     }
 }

@@ -2,34 +2,27 @@ package beverage_management;
 
 import account_management.Account;
 
-public class OrderedBeverage extends Beverage{
+public class OrderedBeverage extends Beverage {
     private String size;
     private int orderQuanity;
     private String type;
     private String sweet;
     private double totalPrice;
     private Account account;
+    private int totalOrdered;
 
     public OrderedBeverage() {
     }
 
-    public OrderedBeverage(int id, String drinkName, String image, double price,
-                           int quantity, String size, int orderQuanity,
-                           String type, String sweet, double totalPrice, Account account) {
-        super(id,drinkName, image, price, quantity);
-        this.size = size;
-        this.orderQuanity = orderQuanity;
-        this.type = type;
-        this.sweet = sweet;
-        this.totalPrice = totalPrice;
-        this.account = account;
+    public OrderedBeverage(int id, String drinkName, String image, double price, int totalOrdered) {
+        super(id,drinkName, image, price);
+        this.totalOrdered = totalOrdered;
     }
 
     public OrderedBeverage(int id, String drinkName, String image,double price, String size,
                            String type, String sweet, int orderQuanity, double totalPrice, Account account) {
         super(id, drinkName, image, price);
         this.size = size;
-
         this.type = type;
         this.sweet = sweet;
         this.orderQuanity = orderQuanity;
@@ -93,6 +86,18 @@ public class OrderedBeverage extends Beverage{
         } else {
             return 0;
         }
+    }
+
+    public int getTotalOrdered() {
+        return totalOrdered;
+    }
+
+    public void setTotalOrdered(int totalOrdered) {
+        this.totalOrdered = totalOrdered;
+    }
+
+    public String printOrdered(){
+        return getId() + ", " + getTotalOrdered();
     }
 
     @Override

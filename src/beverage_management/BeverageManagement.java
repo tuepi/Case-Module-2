@@ -11,8 +11,6 @@ import java.util.Scanner;
 public class BeverageManagement {
 
     public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
-    public static final String ORDER_FILE_PATH = "src\\data_file\\order.csv";
-    // từ order ddeerr làm gì???
 
     private List<Beverage> beverages = new ArrayList<>();
     FileCsv fileCsv = new FileCsv();
@@ -115,7 +113,9 @@ public class BeverageManagement {
         }
     }
 
-    public void findBeverageByName(String name) {
+    public void findBeverageByName() {
+        System.out.print("Nhập Tên Sản Phẩm muốn tìm kiếm: ");
+        String name = scanner.nextLine().toLowerCase();
         int count = 0;
         for (Beverage b : beverages) {
             if (b.getDrinkName().toLowerCase().contains(name)) {
@@ -131,14 +131,14 @@ public class BeverageManagement {
         }
     }
 
-    public void updateStatusByQuanity(int newQuanity) throws IOException {
+    public void updateStatusByQuanity() throws IOException {
 //     update số lượng chỉnh sửa số lượng
         System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
         if (index != -1) {
             System.out.print("Số lượng Sản Phẩm mới là: ");
-            newQuanity = Integer.parseInt(scanner.nextLine());
+            int newQuanity = Integer.parseInt(scanner.nextLine());
             beverages.get(index).setQuantity(newQuanity);
             fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
             System.out.println("ĐÃ SỬA THÀNH CÔNG!!!");

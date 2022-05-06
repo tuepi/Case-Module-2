@@ -148,10 +148,9 @@ public class AccountManagement {
         System.out.println("---------------------------------");
         System.out.println("ĐÃ SỬA TÀI KHOẢN THÀNH CÔNG!!!");
         System.out.println("---------------------------------");
-
     }
 
-    public Account findByEmail(String userName){
+    public Account findByUserName(String userName){
         int index = findIndexByUserName(userName);
         if (index != -1){
             return accounts.get(index);
@@ -162,7 +161,6 @@ public class AccountManagement {
     }
 
     public int findIndexByUserName(String userName) {
-
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getUserName().equals(userName)) {
                 return i;
@@ -173,8 +171,27 @@ public class AccountManagement {
 
 
 
-    public void remove(){
-
+    public void removeAccount() throws IOException {
+        System.out.print("Nhập Tên Khách Hàng muốn xóa Tài Khoản: ");
+        String userName = scanner.nextLine();
+        int index = findIndexByUserName(userName);
+        String answer;
+        if (index != -1) {
+            System.out.println("Bạn chắc chắn muốn xóa Sản Phẩm: " + accounts.get(index) + "?");
+            do {
+                System.out.print("Nhập lựa chọn để tiếp tục (Y/N) >>> ");
+                answer = scanner.nextLine();
+                if (answer.equals("y")) {
+                    accounts.remove(index);
+                    fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
+                    System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
+                    System.out.println("---------------------------------");
+                }
+            } while (!answer.equals("y") && !answer.equals("n"));
+        } else {
+            System.out.println("Không tồn tại Tài Khoản có tên " + userName);
+            System.out.println("---------------------------------");
+        }
     }
 
     public void printUsers(){

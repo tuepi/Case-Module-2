@@ -50,7 +50,7 @@ public class OrderManagement {
                             String size = selectionSize();
                             String type = selectionType();
                             String sweet = selectionSweet();
-                            String answer = null;
+                            String answer;
                             double total = 0;
 
                             OrderedBeverage orderedBeverage
@@ -179,7 +179,7 @@ public class OrderManagement {
                 choice = Integer.parseInt(sc.nextLine());
                 switch (choice) {
                     case 1:
-
+                        System.out.println("Xác Nhận Giao Hàng :");
                         break;
                     case 2:
                         System.out.println("--------------------------------");
@@ -201,17 +201,36 @@ public class OrderManagement {
             System.out.println("Nhập lại lựa chọn:");
             payment();
         }
-
     }
+
+    List<OrderedBeverage> orderedBeverages = new ArrayList<>();
 
     public void printOrderedMany() {
         // dựa vào count của list
+//        OrderedBeverage orderedBeverage;
+            for (OrderedBeverage ob : orderedList) {
+                orderedBeverages.add(ob);
+//                for (OrderedBeverage o : orderedBeverages){
+//                    if (ob.getId() != o.getId()){
+////                    orderedBeverage = new OrderedBeverage(ob.getId(), ob.getDrinkName(), ob.getImage(), ob.getPrice(), o.getTotalOrdered());
+//                        o.setTotalOrdered(ob.getTotalOrdered());
+//                        orderedBeverages.add(ob);
+//                    } else {
+//                        o.setTotalOrdered(o.getTotalOrdered() + ob.getOrderQuanity());
+//                    }
+//                }
+            }
 
-    }
 
-    public void totalQuantitySold() {
-//      tổng số đã bán theo order
+//        for (int i = 0; i < orderedBeverages.size(); i++) {
+//            // sắp xếp
+//
+//        }
+        for (OrderedBeverage ob : orderedBeverages) {
+            for (OrderedBeverage o : orderedBeverages) {
 
+            }
+        }
     }
 
     public void totalRevenue() {
@@ -228,7 +247,5 @@ public class OrderManagement {
         }
     }
 
-    public int calculateThePrice(int quannity, int size) {
-        return 0;
-    }
+
 }
