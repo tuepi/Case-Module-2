@@ -76,7 +76,6 @@ public class BeverageManagement {
         System.out.print("Nhập ID Sản Phẩm muốn thay đổi: ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
-        // check xem có muốn sửa k?
         if (index != -1) {
             System.out.println("Sẽ thay đổi đồ uống " + beverages.get(index).getDrinkName());
             Beverage beverage = creatBeverage();
@@ -132,7 +131,6 @@ public class BeverageManagement {
     }
 
     public void updateStatusByQuanity() throws IOException {
-//     update số lượng chỉnh sửa số lượng
         System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
         int id = Integer.parseInt(scanner.nextLine());
         int index = findById(id);
@@ -165,11 +163,5 @@ public class BeverageManagement {
     public void sortByPrice(){
         Collections.sort(this.beverages);
     }
-
-    public void printByUser() {
-//      danh sách mà 1 khách đã mua
-
-    }
-
 
 }

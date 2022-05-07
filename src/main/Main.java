@@ -24,7 +24,10 @@ public class Main {
 //        fileCsv.readFileOrder(orderManagement.getOrderedList(), "src\\data_file\\order.csv");
 //        orderManagement.order();
 //        orderManagement.payment();
-//         handleMenu.showMenuLoginAndSignUp();
+
+                handleMenu.showMenuLoginAndSignUp();
+
+
          //           Beverage bb = b.creatBeverage();
 //           b.addBeverage();
 //        fileCsv.readFileBeverage(b.getBeverages(),"src\\data_file\\beverage.csv");
@@ -36,6 +39,6 @@ public class Main {
 //        a.removeAccount();
 //        a.printUsers();
 
-        orderManagement.printOrderedMany();
+//        orderManagement.printByAccount();
     }
 }

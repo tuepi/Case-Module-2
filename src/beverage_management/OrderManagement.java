@@ -34,7 +34,6 @@ public class OrderManagement {
     }
 
     public void order() throws IOException {
-        // Sau khi hiển thị danh sách
         do {
             System.out.print("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
             int id = Integer.parseInt(sc.nextLine());
@@ -100,12 +99,12 @@ public class OrderManagement {
 
     public String selectionSize() {
         String size = null;
+        System.out.println("-----------------------------------");
         System.out.println("Chọn size:");
-        System.out.println("1. Size M");
-        System.out.println("2. Size L");
+        System.out.println("1. Size M\t\t\t2. Size L");
         int choice = -1;
         do {
-            System.out.print("Nhập lựa chọn >>> ");
+            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
             choice = Integer.parseInt(sc.nextLine());
             switch (choice) {
                 case 1:
@@ -123,12 +122,12 @@ public class OrderManagement {
 
     public String selectionType() {
         String type = null;
+        System.out.println("-----------------------------------");
         System.out.println("Chọn Kiểu:");
-        System.out.println("1. Nóng");
-        System.out.println("2. Lạnh");
+        System.out.println("1. Nóng\t\t\t2. Lạnh");
         int choiceOfType = -1;
         do {
-            System.out.print("Nhập lựa chọn >>> ");
+            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
             choiceOfType = Integer.parseInt(sc.nextLine());
             switch (choiceOfType) {
                 case 1:
@@ -146,19 +145,19 @@ public class OrderManagement {
 
     public String selectionSweet() {
         String sweet = null;
+        System.out.println("-----------------------------------");
         System.out.println("Chọn Độ Ngọt:");
-        System.out.println("1. Không Ngọt");
-        System.out.println("2. Ngọt");
+        System.out.println("1. Ngọt\t\t\t2. Không Ngọt");
         int choiceOfSweet = -1;
         do {
-            System.out.print("Nhập lựa chọn >>> ");
+            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
             choiceOfSweet = Integer.parseInt(sc.nextLine());
             switch (choiceOfSweet) {
                 case 1:
-                    sweet = "Không Ngọt";
+                    sweet = "Ngọt";
                     break;
                 case 2:
-                    sweet = "Ngọt";
+                    sweet = "Không Ngọt";
                     break;
                 default:
                     System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
@@ -227,9 +226,7 @@ public class OrderManagement {
 //
 //        }
         for (OrderedBeverage ob : orderedBeverages) {
-            for (OrderedBeverage o : orderedBeverages) {
 
-            }
         }
     }
 
@@ -245,6 +242,21 @@ public class OrderManagement {
         for (OrderedBeverage ob : getOrderedList()) {
             System.out.println(ob);
         }
+    }
+
+    public void printByAccount(){
+        int count = 0;
+        for (OrderedBeverage o : orderedList) {
+            if (accountManagement.getAccount().getUserName().equals(o.getAccount().getUserName())){
+                count++;
+                System.out.println("Đơn Hàng thứ " + count + ":");
+                System.out.println(o);
+            }
+        }
+        if (count == 0){
+            System.out.println("Quý Khách chưa có đơn hàng nào!!!");
+        }
+        System.out.println("-----------------------------------");
     }
 
 

@@ -17,9 +17,9 @@ public class AccountManagement {
     public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     public static final String NOT_VALID_EMAIL_MESSAGE = "Nhập Email chưa đúng định dạng!!!\nYêu cầu nhập lại theo dạng (username@main.com) >>> ";
     public static final String NOT_VALID_PASS_MESSAGE =
-            "Nhập Password chưa đúng định dạng!!!\n" +
+                    "Nhập Password chưa đúng định dạng!!!\n" +
                     "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
-                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt]>>>";
+                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
 
     private List<Account> accounts = new ArrayList<>();
 
@@ -63,7 +63,6 @@ public class AccountManagement {
             System.out.println("---------------------------------");
 
             count = 1;
-            // HIỂN THỊ MÀN HÌNH QUẢN LÝ
         } else {
             for (Account ac : accounts) {
                 if (ac.getEmail().equals(email) && ac.getPassword().equals(password)) {
@@ -75,7 +74,6 @@ public class AccountManagement {
                     System.out.println("---------------------------------");
                     account = new Account(ac.getUserName(), email, password);
                     orderedBeverage.setAccount(account);
-                    //hiển thị màn hình order
                     break;
                 }
             }
@@ -177,7 +175,7 @@ public class AccountManagement {
         int index = findIndexByUserName(userName);
         String answer;
         if (index != -1) {
-            System.out.println("Bạn chắc chắn muốn xóa Sản Phẩm: " + accounts.get(index) + "?");
+            System.out.println("Bạn chắc chắn muốn xóa Tài Khoản: " + accounts.get(index) + "?");
             do {
                 System.out.print("Nhập lựa chọn để tiếp tục (Y/N) >>> ");
                 answer = scanner.nextLine();

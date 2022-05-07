@@ -10,6 +10,16 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HandleMenu {
+    public static final int EXIT_CHOICE = 0;
+    public static final int FIRST_CHOICE = 1;
+    public static final int SECOND_CHOICE = 2;
+    public static final int THIRD_CHOICE = 3;
+    public static final int FOURTH_CHOICE = 4;
+    public static final int FIFTH_CHOICE = 5;
+    public static final int SIXTH_CHOICE = 6;
+    public static final int SEVENTH_CHOICE = 7;
+    public static final int EIGHTH_CHOICE = 8;
+    public static final int NINTH_CHOICE = 9;
     Menu menu = new Menu();
     AccountManagement accountManagement = new AccountManagement();
     BeverageManagement beverageManagement = new BeverageManagement();
@@ -28,14 +38,14 @@ public class HandleMenu {
                 System.out.print("Nhập lựa chọn: ");
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
-                    case 1:
+                    case FIRST_CHOICE:
                         checkLogin();
                         break;
-                    case 2:
+                    case SECOND_CHOICE:
                         accountManagement.signUp();
                         showMenuLoginAndSignUp();
                         break;
-                    case 0:
+                    case EXIT_CHOICE:
                         System.out.println("CẢM ƠN VÀ HẸN GẶP LẠI QUÝ KHÁCH!!!");
                         System.exit(0);
                     default:
@@ -78,11 +88,11 @@ public class HandleMenu {
                 System.out.print("Nhập lựa chọn: ");
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice){
-                    case 1:
+                    case FIRST_CHOICE:
                         beverageManagement.printAll();
                         showMenuManage();
                         break;
-                    case 2:
+                    case SECOND_CHOICE:
                         do {
                             beverageManagement.addBeverage();
                             do {System.out.print("Bạn có muốn tiếp tục thêm (Y/N) >>> ");
@@ -91,35 +101,35 @@ public class HandleMenu {
                         } while (answer.equals("y"));
                         showMenuManage();
                         break;
-                    case 3:
+                    case THIRD_CHOICE:
                         beverageManagement.editBeverage();
                         showMenuManage();
                         break;
-                    case 4:
+                    case FOURTH_CHOICE:
                         beverageManagement.removeBeverage();
                         showMenuManage();
                         break;
-                    case 5:
+                    case FIFTH_CHOICE:
                         beverageManagement.updateStatusByQuanity();
                         showMenuManage();
                         break;
-                    case 6:
+                    case SIXTH_CHOICE:
                         beverageManagement.findBeverageByName();
                         showMenuManage();
                         break;
-                    case 7:
+                    case SEVENTH_CHOICE:
                         accountManagement.printUsers();
                         showMenuManage();
                         break;
-                    case 8:
+                    case EIGHTH_CHOICE:
                         orderManagement.printAllOrdered();
                         showMenuManage();
                         break;
-                    case 9:
+                    case NINTH_CHOICE:
                         orderManagement.totalRevenue();
                         showMenuManage();
                         break;
-                    case 0:
+                    case EXIT_CHOICE:
                         showMenuLoginAndSignUp();
                         break;
                     default:
@@ -140,39 +150,40 @@ public class HandleMenu {
             System.out.print("Nhập lựa chọn: ");
             choice1 = Integer.parseInt(scanner.nextLine());
             switch (choice1) {
-                case 1:
+                case FIRST_CHOICE:
                     orderManagement.order();
                     showMenuUser();
                     break;
-                case 2:
+                case SECOND_CHOICE:
                     beverageManagement.sortByPrice();
                     showMenuUser();
                     break;
-                case 3:
+                case THIRD_CHOICE:
                     // theo order theo số lượng
                     break;
-                case 4:
-                    // theo order và tên khách TRONG LỚP ORDER
+                case FOURTH_CHOICE:
+                    orderManagement.printByAccount();
+                    showMenuUser();
                     break;
-                case 5:
+                case FIFTH_CHOICE:
                     beverageManagement.findBeverageByName();
                     showMenuUser();
                     break;
-                case 6:
+                case SIXTH_CHOICE:
                     accountManagement.printThisAccount();
                     showMenuUser();
                     break;
-                case 7:
+                case SEVENTH_CHOICE:
                     accountManagement.updateAccount();
                     showMenuUser();
                     break;
-                case 0:
+                case EXIT_CHOICE:
                     System.out.println("TẠM BIỆT QUÝ KHÁCH");
                     showMenuLoginAndSignUp();
                     break;
                 default:
-                    System.out.println("Yêu cầu lựa chọn từ 0 > 3 : ");
+                    System.out.println("Yêu cầu lựa chọn từ 0 > 7 : ");
             }
-        } while (choice1 < 0 || choice1 > 3);
+        } while (choice1 < 0 || choice1 > 7);
     }
 }
