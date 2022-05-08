@@ -101,7 +101,7 @@ public class Beverage implements Comparable<Beverage> {
                 + "ID = " + id + ", "
                 + drinkName + ", "
                 + image + ", "
-                + price + "kVNĐ, "
+                + price + "kVNĐ/Size M, "
                 + getStatus() +
                 '}';
     }

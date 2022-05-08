@@ -39,7 +39,7 @@ public class FileCsv {
     public void writeFileBeverage(List<Beverage> list, String filePath) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String line = "ID,TÊN,HÌNH MINH HỌA,GIÁ(kVNĐ),SỐ LƯỢNG,TRẠNG THÁI\n";
+        String line = "ID,TÊN,HÌNH MINH HỌA,GIÁ(kVNĐ/Size M),SỐ LƯỢNG,TRẠNG THÁI\n";
         for (Beverage b : list) {
             line += b.getId() + ","
                     + b.getDrinkName() + ","
@@ -122,6 +122,7 @@ public class FileCsv {
         for (Account a : list) {
             line += a.getUserName() + ","
                     + a.getEmail() + ","
+//                    + a.getPhoneNumber() + ","
                     + a.getPassword() + "\n";
         }
         bufferedWriter.write(line);

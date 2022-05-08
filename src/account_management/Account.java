@@ -15,6 +15,7 @@ public class Account {
         this.userName = userName;
         this.email = email;
         this.password = password;
+//        this.phoneNumber = phoneNumber;
     }
 
     public String getUserName() {
@@ -55,6 +56,7 @@ public class Account {
                 "userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

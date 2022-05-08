@@ -2,6 +2,7 @@ package account_management;
 
 import beverage_management.OrderedBeverage;
 import data_file.FileCsv;
+import exception_error.ExceptionHandling;
 import validate.DetailValidate;
 import validate.ValidateAll;
 
@@ -20,11 +21,15 @@ public class AccountManagement {
                     "Nhập Password chưa đúng định dạng!!!\n" +
                     "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
                     "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
+    public static final int FIRST_CHOICE = 1;
+    public static final int SECOND_CHOICE = 2;
+    public static final int THIRD_CHOICE = 3;
 
     private List<Account> accounts = new ArrayList<>();
 
     FileCsv fileCsv = new FileCsv();
     ValidateAll validateAll = new ValidateAll();
+    ExceptionHandling exceptionHandling = new ExceptionHandling();
     OrderedBeverage orderedBeverage = new OrderedBeverage();
     public static Account account;
     Scanner scanner = new Scanner(System.in);
@@ -103,6 +108,8 @@ public class AccountManagement {
                 }
             }
         }
+        System.out.print("Nhập Số Điện Thoại: ");
+        String phoneNumber = scanner.nextLine();
         boolean checkPass = false;
         String password = null;
         while (!checkPass) {
@@ -131,18 +138,41 @@ public class AccountManagement {
         System.out.println("Thông tin Tài Khoản của Quý Khách là:");
         System.out.println("Tên Tài Khoản: " + account.getUserName());
         System.out.println("Email: " + account.getEmail());
+//        System.out.println("Số Điện Thoại: " + account.getPhoneNumber());
         System.out.println("Mật Khẩu: " + account.getPassword());
         System.out.println("---------------------------------");
     }
 
     public void updateAccount() {
         System.out.println("---------------------------------");
-        System.out.println("Chỉnh sửa Tên Tài Khoản thành: ");
-        String newUserName = scanner.nextLine();
-        account.setUserName(newUserName);
-        System.out.println("Chỉnh sửa Mật Khẩu thành: ");
-        String newPass = scanner.nextLine();
-        account.setPassword(newPass);
+        System.out.println("Quý Khách muốn chỉnh sửa thông tin nào? ");
+        System.out.println("1. Tên Tài Khoản\t\t\t2. Số Điện Thoại\t\t\t3. Mật Khẩu");
+        int choice = -1;
+
+        do {
+            choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
+            switch (choice){
+                case FIRST_CHOICE:
+                    System.out.println("Chỉnh sửa Tên Tài Khoản thành: ");
+                    String newUserName = scanner.nextLine();
+                    account.setUserName(newUserName);
+                    break;
+                case SECOND_CHOICE:
+                    System.out.println("Chỉnh sửa Số Điện Thoại thành: ");
+                    String newPhoneNumber = scanner.nextLine();
+                    account.setPassword(newPhoneNumber);
+                    break;
+                case THIRD_CHOICE:
+                    System.out.println("Chỉnh sửa Mật Khẩu thành: ");
+                    String newPass = scanner.nextLine();
+                    account.setPassword(newPass);
+                    break;
+                default:
+                    System.out.println("---------------------------------");
+                    System.out.println("Nhập lại lựa chọn 1 >>> 3:");
+            }
+        } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);
+
         System.out.println("---------------------------------");
         System.out.println("ĐÃ SỬA TÀI KHOẢN THÀNH CÔNG!!!");
         System.out.println("---------------------------------");
@@ -153,7 +183,7 @@ public class AccountManagement {
         if (index != -1){
             return accounts.get(index);
         } else {
-            System.out.println("Không tìm thấy!!!");
+            System.out.println("Không tìm thấy Tài Khoản!");
             return null;
         }
     }

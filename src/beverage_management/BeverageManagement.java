@@ -1,6 +1,7 @@
 package beverage_management;
 
 import data_file.FileCsv;
+import exception_error.ExceptionHandling;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class BeverageManagement {
 
     private List<Beverage> beverages = new ArrayList<>();
     FileCsv fileCsv = new FileCsv();
+    ExceptionHandling exceptionHandling = new ExceptionHandling();
     Scanner scanner = new Scanner(System.in);
     String answer;
 
@@ -30,27 +32,14 @@ public class BeverageManagement {
     }
 
     public Beverage creatBeverage() {
-
         System.out.println("Nhập thông tin Đồ Uống mới:");
         System.out.print("Nhập tên Đồ Uống: ");
         String drinkName = scanner.nextLine();
         System.out.print("Chèn Hình Ảnh: ");
         String image = scanner.nextLine();
-        boolean check = false;
-        double price = 0;
-        int quanity = 0;
-        do {
-            try {
-                System.out.print("Nhập Giá Đồ Uống: ");
-                price = Double.parseDouble(scanner.nextLine());
-                System.out.print("Nhập Số Lượng: ");
-                quanity = Integer.parseInt(scanner.nextLine());
-                check = true;
-            } catch (NumberFormatException i) {
-                System.out.println("Nhập sai định dạng");
-                creatBeverage();
-            }
-        } while (!check);
+        double price = exceptionHandling.checkInputOfDouble("Nhập Giá Đồ Uống: ");
+        int quanity = exceptionHandling.checkInputOfInteger("Nhập Số Lượng: ");
+
         return new Beverage(drinkName, image, price, quanity);
     }
 
@@ -59,6 +48,7 @@ public class BeverageManagement {
         beverage.setId(beverages.size() + 1);
         beverages.add(beverage);
         fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
+        System.out.println("---------------------------------");
         System.out.println("ĐÃ THÊM ĐỒ UỐNG THÀNH CÔNG!!!");
         System.out.println("---------------------------------");
     }
@@ -72,9 +62,9 @@ public class BeverageManagement {
         return -1;
     }
 
+
     public void editBeverage() throws IOException {
-        System.out.print("Nhập ID Sản Phẩm muốn thay đổi: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm muốn thay đổi: ");
         int index = findById(id);
         if (index != -1) {
             System.out.println("Sẽ thay đổi đồ uống " + beverages.get(index).getDrinkName());
@@ -91,8 +81,7 @@ public class BeverageManagement {
     }
 
     public void removeBeverage() throws IOException {
-        System.out.print("Nhập ID Sản Phẩm muốn xóa: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm muốn xóa: ");
         int index = findById(id);
         if (index != -1) {
             System.out.println("Bạn chắc chắn muốn xóa Sản Phẩm: " + beverages.get(index) + "?");
@@ -131,12 +120,10 @@ public class BeverageManagement {
     }
 
     public void updateStatusByQuanity() throws IOException {
-        System.out.print("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm cần chỉnh sửa >>> ");
         int index = findById(id);
         if (index != -1) {
-            System.out.print("Số lượng Sản Phẩm mới là: ");
-            int newQuanity = Integer.parseInt(scanner.nextLine());
+            int newQuanity = exceptionHandling.checkInputOfInteger("Số lượng Sản Phẩm mới là: ");
             beverages.get(index).setQuantity(newQuanity);
             fileCsv.writeFileBeverage(beverages, BEVERAGE_FILE_PATH);
             System.out.println("ĐÃ SỬA THÀNH CÔNG!!!");

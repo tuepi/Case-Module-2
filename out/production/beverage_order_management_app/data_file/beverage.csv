@@ -1,6 +1,9 @@
-ID,TÊN,HÌNH MINH HỌA,GIÁ(kVNĐ),SỐ LƯỢNG,TRẠNG THÁI
-1,Cafe Đen,☕,20.0,42,Còn Hàng
-2,Cafe Sữa,☕,30.0,0,Hết Hàng
+ID,TÊN,HÌNH MINH HỌA,GIÁ(kVNĐ/Size M),SỐ LƯỢNG,TRẠNG THÁI
+1,Cafe Đen,☕,20.0,40,Còn Hàng
+2,Cafe Sữa,☕,30.0,100,Còn Hàng
 3,Bạc Xỉu,☕,30.0,0,Hết Hàng
 4,Cafe Mỹ,☕,35.0,0,Hết Hàng
 5,Trà Chanh,🍹,15.0,80,Còn Hàng
+6,Trà Đào,🍹,30.0,98,Còn Hàng
+7,Trà Sữa Chân Trâu,🧋,50.0,97,Còn Hàng
+8,Capuchino,🍵,40.0,98,Còn Hàng

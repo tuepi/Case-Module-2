@@ -2,18 +2,21 @@ package beverage_management;
 
 import account_management.AccountManagement;
 import data_file.FileCsv;
+import exception_error.ExceptionHandling;
 
 import java.io.IOException;
 import java.net.PortUnreachableException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class OrderManagement {
     public static final String ORDER_FILE_PATH = "src\\data_file\\order.csv";
+    public static final int FIRST_CHOICE = 1;
+    public static final int SECOND_CHOICE = 2;
+    public static final int THIRD_CHOICE = 3;
+    public static final int FOURTH_CHOICE = 4;
 
     Scanner sc = new Scanner(System.in);
+    ExceptionHandling exceptionHandling = new ExceptionHandling();
     AccountManagement accountManagement = new AccountManagement();
     BeverageManagement beverageManagement = new BeverageManagement();
     FileCsv fileCsv = new FileCsv();
@@ -35,16 +38,14 @@ public class OrderManagement {
 
     public void order() throws IOException {
         do {
-            System.out.print("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
-            int id = Integer.parseInt(sc.nextLine());
+            int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
             int index = beverageManagement.findById(id);
             if (index != -1) {
                 Beverage beverage = beverageManagement.getBeverages().get(index);
                 if (beverage.getQuantity() != 0) {
                     System.out.println("Sản Phẩm Quý Khách chọn: " + beverage + " còn " + beverage.getQuantity() + " sản phẩm.");
                     do {
-                        System.out.print("Nhập số lượng: ");
-                        int orderQuanity = Integer.parseInt(sc.nextLine());
+                        int orderQuanity = exceptionHandling.checkInputOfInteger("Nhập số lượng: ");
                         if (orderQuanity > 0 && orderQuanity <= beverage.getQuantity()) {
                             String size = selectionSize();
                             String type = selectionType();
@@ -104,13 +105,12 @@ public class OrderManagement {
         System.out.println("1. Size M\t\t\t2. Size L");
         int choice = -1;
         do {
-            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
-            choice = Integer.parseInt(sc.nextLine());
+            choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
-                case 1:
+                case FIRST_CHOICE:
                     size = "Size M";
                     break;
-                case 2:
+                case SECOND_CHOICE:
                     size = "Size L";
                     break;
                 default:
@@ -127,13 +127,12 @@ public class OrderManagement {
         System.out.println("1. Nóng\t\t\t2. Lạnh");
         int choiceOfType = -1;
         do {
-            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
-            choiceOfType = Integer.parseInt(sc.nextLine());
+            choiceOfType = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choiceOfType) {
-                case 1:
+                case FIRST_CHOICE:
                     type = "Nóng";
                     break;
-                case 2:
+                case SECOND_CHOICE:
                     type = "Lạnh";
                     break;
                 default:
@@ -147,22 +146,27 @@ public class OrderManagement {
         String sweet = null;
         System.out.println("-----------------------------------");
         System.out.println("Chọn Độ Ngọt:");
-        System.out.println("1. Ngọt\t\t\t2. Không Ngọt");
+        System.out.println("1. Không Ngọt\t\t\t2. 30% Đường\t\t\t3. 50% Đường\t\t\t4. 70% Đường");
         int choiceOfSweet = -1;
         do {
-            System.out.print("Nhập lựa chọn 1 hoặc 2 >>> ");
-            choiceOfSweet = Integer.parseInt(sc.nextLine());
+            choiceOfSweet = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choiceOfSweet) {
-                case 1:
-                    sweet = "Ngọt";
-                    break;
-                case 2:
+                case FIRST_CHOICE:
                     sweet = "Không Ngọt";
                     break;
+                case SECOND_CHOICE:
+                    sweet = "30% Đường";
+                    break;
+                case THIRD_CHOICE:
+                    sweet = "50% Đường";
+                    break;
+                case FOURTH_CHOICE:
+                    sweet = "70% Đường";
+                    break;
                 default:
-                    System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
+                    System.out.println("Vui lòng chọn 1 >>> 4 !!!");
             }
-        } while (choiceOfSweet != 1 && choiceOfSweet != 2);
+        } while (choiceOfSweet < 1 || choiceOfSweet > 4);
         return sweet;
     }
 
@@ -174,19 +178,18 @@ public class OrderManagement {
                 System.out.println("1. Thanh Toán bằng tiền mặt.");
                 System.out.println("2. Thanh Toán qua ví điện tử.");
                 System.out.println("3. Thanh Toán bằng thẻ Ngân hàng.");
-                System.out.print("Nhập lựa chọn >>> ");
-                choice = Integer.parseInt(sc.nextLine());
+                choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
                 switch (choice) {
-                    case 1:
+                    case FIRST_CHOICE:
                         System.out.println("Xác Nhận Giao Hàng :");
                         break;
-                    case 2:
+                    case SECOND_CHOICE:
                         System.out.println("--------------------------------");
                         System.out.println("Quý Khách chưa có vé điện tử\nNhập 1 để trả tiền mặt đi nhé !!!");
                         System.out.println("--------------------------------");
                         payment();
                         break;
-                    case 3:
+                    case THIRD_CHOICE:
                         System.out.println("--------------------------------");
                         System.out.println("Tài khoản của Quý Khách làm gì còn tiền\nNhập 1 để trả tiền mặt đi nhé !!!");
                         System.out.println("--------------------------------");
@@ -202,33 +205,11 @@ public class OrderManagement {
         }
     }
 
-    List<OrderedBeverage> orderedBeverages = new ArrayList<>();
 
     public void printOrderedMany() {
-        // dựa vào count của list
-//        OrderedBeverage orderedBeverage;
-            for (OrderedBeverage ob : orderedList) {
-                orderedBeverages.add(ob);
-//                for (OrderedBeverage o : orderedBeverages){
-//                    if (ob.getId() != o.getId()){
-////                    orderedBeverage = new OrderedBeverage(ob.getId(), ob.getDrinkName(), ob.getImage(), ob.getPrice(), o.getTotalOrdered());
-//                        o.setTotalOrdered(ob.getTotalOrdered());
-//                        orderedBeverages.add(ob);
-//                    } else {
-//                        o.setTotalOrdered(o.getTotalOrdered() + ob.getOrderQuanity());
-//                    }
-//                }
-            }
-
-
-//        for (int i = 0; i < orderedBeverages.size(); i++) {
-//            // sắp xếp
-//
-//        }
-        for (OrderedBeverage ob : orderedBeverages) {
-
-        }
+        ////////////////
     }
+
 
     public void totalRevenue() {
         double total = 0;
@@ -238,22 +219,22 @@ public class OrderManagement {
         System.out.println("Tổng Doanh Thu: " + total + " kVNĐ");
     }
 
-    public void printAllOrdered(){
+    public void printAllOrdered() {
         for (OrderedBeverage ob : getOrderedList()) {
             System.out.println(ob);
         }
     }
 
-    public void printByAccount(){
+    public void printByAccount() {
         int count = 0;
         for (OrderedBeverage o : orderedList) {
-            if (accountManagement.getAccount().getUserName().equals(o.getAccount().getUserName())){
+            if (accountManagement.getAccount().getUserName().equals(o.getAccount().getUserName())) {
                 count++;
                 System.out.println("Đơn Hàng thứ " + count + ":");
                 System.out.println(o);
             }
         }
-        if (count == 0){
+        if (count == 0) {
             System.out.println("Quý Khách chưa có đơn hàng nào!!!");
         }
         System.out.println("-----------------------------------");
