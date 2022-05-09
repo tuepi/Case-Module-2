@@ -218,8 +218,8 @@ public class OrderManagement {
                     System.out.println("Đơn hàng sẽ được giao đến địa chỉ " + address + " trong " + deliveryTime + " phút nữa !!!");
                     for (OrderedBeverage o : orderingList) {
                         orderedList.add(o);
-//                        orderingList.remove(o);
                     }
+                    orderingList.removeAll(orderingList);
                     fileCsv.writeFileOrder(orderedList, ORDER_FILE_PATH);
                     break;
                 case SECOND_CHOICE:
@@ -259,7 +259,7 @@ public class OrderManagement {
         int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm cần xóa trong đơn: ");
         int index = findByIdForOrder(id);
         if (index != -1) {
-//            System.out.println("Sẽ thay đổi Sản phẩm " + orderingList.get(index).getDrinkName());
+            System.out.println("Sản phẩm " + orderingList.get(index));
             Beverage beverage = beverageManagement.getBeverages().get(beverageManagement.findById(id));
             beverage.setQuantity(beverage.getQuantity() + orderingList.get(index).getOrderQuanity());
             orderingList.remove(index);
