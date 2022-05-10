@@ -140,6 +140,7 @@ public class HandleMenu {
                 case THIRD_CHOICE:
                     orderManagement.printOrderedMany();
                     // theo order theo số lượng
+                    System.out.println("Chưa có gì đâu thưa quý zị !!!");
                     break;
                 case FOURTH_CHOICE:
                     orderManagement.printByAccount();

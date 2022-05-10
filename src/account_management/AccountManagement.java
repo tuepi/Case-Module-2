@@ -39,7 +39,7 @@ public class AccountManagement {
     }
 
     public void setAccount(Account account) {
-        this.account = account;
+        AccountManagement.account = account;
     }
 
     public AccountManagement() throws Exception {
@@ -108,8 +108,6 @@ public class AccountManagement {
                 }
             }
         }
-        System.out.print("Nhập Số Điện Thoại: ");
-        String phoneNumber = scanner.nextLine();
         boolean checkPass = false;
         String password = null;
         while (!checkPass) {
@@ -138,12 +136,11 @@ public class AccountManagement {
         System.out.println("Thông tin Tài Khoản của Quý Khách là:");
         System.out.println("Tên Tài Khoản: " + account.getUserName());
         System.out.println("Email: " + account.getEmail());
-//        System.out.println("Số Điện Thoại: " + account.getPhoneNumber());
         System.out.println("Mật Khẩu: " + account.getPassword());
         System.out.println("---------------------------------");
     }
 
-    public void updateAccount() {
+    public void updateAccount() throws IOException {
         System.out.println("---------------------------------");
         System.out.println("Quý Khách muốn chỉnh sửa thông tin nào? ");
         System.out.println("1. Tên Tài Khoản\t\t\t2. Số Điện Thoại\t\t\t3. Mật Khẩu");
@@ -172,7 +169,7 @@ public class AccountManagement {
                     System.out.println("Nhập lại lựa chọn 1 >>> 3:");
             }
         } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);
-
+        fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
         System.out.println("---------------------------------");
         System.out.println("ĐÃ SỬA TÀI KHOẢN THÀNH CÔNG!!!");
         System.out.println("---------------------------------");

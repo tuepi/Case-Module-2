@@ -15,10 +15,9 @@ public class FileCsv {
     }
 
     public List<Beverage> readFileBeverage(List<Beverage> list, String filePath) throws Exception {
-        try {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
-            list.clear();
+//            list.clear();
             if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
                     String out = scanner.nextLine();
@@ -30,9 +29,6 @@ public class FileCsv {
             } else {
                 throw new Exception();
             }
-        } catch (Exception e) {
-
-        }
         return list;
     }
 
@@ -57,7 +53,7 @@ public class FileCsv {
         AccountManagement accountManagement = new AccountManagement();
         FileReader fileReader = new FileReader(filePath);
         Scanner scanner = new Scanner(fileReader);
-        orderedList.clear();
+//        orderedList.clear();
         if (scanner.nextLine() != null) {
             while (scanner.hasNext()) {
                 String out = scanner.nextLine();
@@ -98,7 +94,7 @@ public class FileCsv {
         try {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
-            list.clear();
+//            list.clear();
             if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
                     String out = scanner.nextLine();

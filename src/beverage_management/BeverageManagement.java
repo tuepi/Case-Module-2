@@ -13,9 +13,11 @@ public class BeverageManagement {
 
     public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
     public static final String MILK_TEA_IMAGE = "\uD83E\uDDCB";
-    public static final String CAFE_IMAGE = "src\\data_file\\beverage.csv";
-//    public static final String  = "src\\data_file\\beverage.csv";
-//    public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
+    public static final String CAFE_IMAGE = "☕";
+    public static final String JUICE_IMAGE = "\uD83C\uDF79";
+    public static final String COCKTAILS_IMAGE = "🍸";
+    public static final String SMOOTHIE_IMAGE = "\uD83E\uDD5B";
+
 
 
     private List<Beverage> beverages = new ArrayList<>();
@@ -40,12 +42,41 @@ public class BeverageManagement {
         System.out.println("Nhập thông tin Đồ Uống mới:");
         System.out.print("Nhập tên Đồ Uống: ");
         String drinkName = scanner.nextLine();
-        System.out.print("Chèn Hình Ảnh: ");
-        String image = scanner.nextLine();
+        String image = insertImage();
         double price = exceptionHandling.checkInputOfDouble("Nhập Giá Đồ Uống: ");
         int quanity = exceptionHandling.checkInputOfInteger("Nhập Số Lượng: ");
 
         return new Beverage(drinkName, image, price, quanity);
+    }
+
+    public String insertImage(){
+        String image = null;
+        System.out.println("Chọn Kiểu Đồ Uống:");
+        System.out.println("1. Cafe\t\t2. Trà Sữa\t\t3. Nước trái cây\t\t4. Sinh Tố\t\t5. Cocktails");
+        int choice;
+        do {
+            choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
+            switch (choice) {
+                case 1:
+                    image = CAFE_IMAGE;
+                    break;
+                case 2:
+                    image = MILK_TEA_IMAGE;
+                    break;
+                case 3:
+                    image = JUICE_IMAGE;
+                    break;
+                case 4:
+                    image = SMOOTHIE_IMAGE;
+                    break;
+                case 5:
+                    image = COCKTAILS_IMAGE;
+                    break;
+                default:
+                    System.out.println("Vui lòng chọn 1 đến 5 !!!");
+            }
+        } while (choice < 1 || choice > 5);
+        return image;
     }
 
     public void addBeverage() throws IOException {
