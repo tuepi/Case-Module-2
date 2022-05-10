@@ -17,7 +17,6 @@ public class OrderManagement {
     ExceptionHandling exceptionHandling = new ExceptionHandling();
     AccountManagement accountManagement = new AccountManagement();
     BeverageManagement beverageManagement = new BeverageManagement();
-//    HandleMenu handleMenu = new HandleMenu();
     FileCsv fileCsv = new FileCsv();
 
     private List<OrderedBeverage> orderedList = new ArrayList<>();
@@ -36,7 +35,9 @@ public class OrderManagement {
     }
 
     public void order() throws Exception {
+        boolean check = false;
         do {
+
             int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
             int index = beverageManagement.findById(id);
             if (index != -1) {
@@ -79,6 +80,7 @@ public class OrderManagement {
                                     System.out.println("--------------------------------");
                                     orderedBeverage.setTotalPrice(total);
                                     payment();
+                                    check = true;
                                     break;
                                 }
                             } while (!answer.equals("y"));// !answer.equals("n")
@@ -86,7 +88,7 @@ public class OrderManagement {
                         } else {
                             System.out.println("Số Lượng vừa nhập không hợp lệ!!!\nVui lòng nhập lại >>>");
                         }
-                    } while (true);
+                    } while (!check);
                 } else {
                     System.out.println(beverage);
                     System.out.println("Rất tiếc!!! Sản Phẩm Quý Khách chọn đã hết hàng!!!\nVui lòng nhập lại >>>");
@@ -94,7 +96,7 @@ public class OrderManagement {
             } else {
                 System.out.println("Không tồn tại đồ uống có ID = " + id + "\nVui lòng nhập lại >>>");
             }
-        } while (true);
+        } while (!check);
     }
 
     public String selectionSize() {
@@ -188,21 +190,20 @@ public class OrderManagement {
                     System.out.println("--------------------------------");
                     System.out.println("Quý Khách chưa có ví điện tử\nNhập 1 để trả tiền mặt đi nhé !!!");
                     System.out.println("--------------------------------");
-                    payment();
                     break;
                 case THIRD_CHOICE:
                     System.out.println("--------------------------------");
                     System.out.println("Tài khoản của Quý Khách làm gì còn tiền\nNhập 1 để trả tiền mặt đi nhé !!!");
                     System.out.println("--------------------------------");
-                    payment();
                     break;
                 default:
                     System.out.println("Nhập lại lựa chọn:");
             }
-        } while (choice < 1 || choice > 3);
+        } while (choice != FIRST_CHOICE);
     }
 
     public void checkOrder() throws Exception {
+        boolean check = false;
         int choice;
         do {
             System.out.println("Mời Xác Nhận: ");
@@ -245,6 +246,7 @@ public class OrderManagement {
                             order();
                         }
                         if (answer.equals("n")) {
+//                            check = true;
                             break;
                         }
                     } while (!answer.equals("y"));

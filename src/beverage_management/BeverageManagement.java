@@ -12,6 +12,11 @@ import java.util.Scanner;
 public class BeverageManagement {
 
     public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
+    public static final String MILK_TEA_IMAGE = "\uD83E\uDDCB";
+    public static final String CAFE_IMAGE = "src\\data_file\\beverage.csv";
+//    public static final String  = "src\\data_file\\beverage.csv";
+//    public static final String BEVERAGE_FILE_PATH = "src\\data_file\\beverage.csv";
+
 
     private List<Beverage> beverages = new ArrayList<>();
     FileCsv fileCsv = new FileCsv();
@@ -149,7 +154,12 @@ public class BeverageManagement {
     }
 
     public void sortByPrice(){
-        Collections.sort(this.beverages);
+        List<Beverage> sortedBeverages = beverages;
+        Collections.sort(sortedBeverages);
+
+        for (Beverage b : sortedBeverages) {
+            System.out.println(b);
+        }
     }
 
 }
