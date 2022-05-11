@@ -11,13 +11,10 @@ import java.util.Scanner;
 
 public class FileCsv {
 
-    public FileCsv() throws Exception {
-    }
-
     public List<Beverage> readFileBeverage(List<Beverage> list, String filePath) throws Exception {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
-//            list.clear();
+            list.clear();
             if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
                     String out = scanner.nextLine();
@@ -53,14 +50,13 @@ public class FileCsv {
         AccountManagement accountManagement = new AccountManagement();
         FileReader fileReader = new FileReader(filePath);
         Scanner scanner = new Scanner(fileReader);
-//        orderedList.clear();
+        orderedList.clear();
         if (scanner.nextLine() != null) {
             while (scanner.hasNext()) {
                 String out = scanner.nextLine();
                 String[] arr = out.split(",");
                 Account account = accountManagement.findByUserName(arr[9]);
                 OrderedBeverage orderedBeverage = new OrderedBeverage(Integer.parseInt(arr[0]), arr[1], arr[2], Double.parseDouble(arr[3]), arr[4], arr[5], arr[6], Integer.parseInt(arr[7]), Double.parseDouble(arr[8]), account);
-//                    orderedBeverage.setId(orderedList.size() + 1);
                 orderedList.add(orderedBeverage);
             }
         } else {
@@ -91,10 +87,9 @@ public class FileCsv {
     }
 
     public List<Account> readFileAccount(List<Account> list, String filePath) throws Exception {
-        try {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
-//            list.clear();
+            list.clear();
             if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
                     String out = scanner.nextLine();
@@ -105,9 +100,6 @@ public class FileCsv {
             } else {
                 throw new Exception();
             }
-        } catch (Exception e) {
-
-        }
         return list;
     }
 
@@ -118,7 +110,6 @@ public class FileCsv {
         for (Account a : list) {
             line += a.getUserName() + ","
                     + a.getEmail() + ","
-//                    + a.getPhoneNumber() + ","
                     + a.getPassword() + "\n";
         }
         bufferedWriter.write(line);

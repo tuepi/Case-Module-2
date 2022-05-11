@@ -12,15 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountManagement {
-    public static final String PLEASE_SIGN_UP = "MỜI BẠN ĐĂNG KÝ";
+    public static final String PLEASE_SIGN_UP = "MỜI BẠN ĐĂNG KÝ >>> ";
     public static final String USER_FILE_PATH = "src\\data_file\\user.csv";
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     public static final String NOT_VALID_EMAIL_MESSAGE = "Nhập Email chưa đúng định dạng!!!\nYêu cầu nhập lại theo dạng (username@main.com) >>> ";
     public static final String NOT_VALID_PASS_MESSAGE =
-                    "Nhập Password chưa đúng định dạng!!!\n" +
-                    "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
-                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
+            """
+                    Nhập Password chưa đúng định dạng!!!
+                    Nhập lại Mật khẩu theo yêu cầu sau:
+                    [Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>>\s""";
     public static final int FIRST_CHOICE = 1;
     public static final int SECOND_CHOICE = 2;
     public static final int THIRD_CHOICE = 3;
@@ -38,10 +39,6 @@ public class AccountManagement {
         return account;
     }
 
-    public void setAccount(Account account) {
-        AccountManagement.account = account;
-    }
-
     public AccountManagement() throws Exception {
         fileCsv.readFileAccount(accounts, USER_FILE_PATH);
     }
@@ -55,7 +52,7 @@ public class AccountManagement {
     }
 
     public int login() {
-        System.out.println("Mời bạn Đăng Nhập >>>");
+        System.out.println("MỜI BẠN ĐĂNG NHẬP >>>");
         System.out.print("Nhập Email: ");
         String email = scanner.nextLine();
         System.out.print("Nhập Mật Khẩu: ");
@@ -92,12 +89,13 @@ public class AccountManagement {
     }
 
     public void signUp() throws IOException {
+        System.out.println("---------------------------------");
         System.out.println(PLEASE_SIGN_UP);
         System.out.print("Nhập Tên Tài Khoản: ");
         String userName = scanner.nextLine();
         boolean checkEmail = false;
         String email = null;
-        while (checkEmail == false) {
+        while (!checkEmail) {
             System.out.print("Nhập email: ");
             email = scanner.nextLine();
             checkEmail = validateAll.validate(new DetailValidate(EMAIL_REGEX, NOT_VALID_EMAIL_MESSAGE), email);
@@ -144,29 +142,30 @@ public class AccountManagement {
         System.out.println("---------------------------------");
         System.out.println("Quý Khách muốn chỉnh sửa thông tin nào? ");
         System.out.println("1. Tên Tài Khoản\t\t\t2. Số Điện Thoại\t\t\t3. Mật Khẩu");
-        int choice = -1;
+        int choice;
 
         do {
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
-            switch (choice){
-                case FIRST_CHOICE:
+            switch (choice) {
+                case FIRST_CHOICE -> {
                     System.out.println("Chỉnh sửa Tên Tài Khoản thành: ");
                     String newUserName = scanner.nextLine();
                     account.setUserName(newUserName);
-                    break;
-                case SECOND_CHOICE:
+                }
+                case SECOND_CHOICE -> {
                     System.out.println("Chỉnh sửa Số Điện Thoại thành: ");
                     String newPhoneNumber = scanner.nextLine();
                     account.setPassword(newPhoneNumber);
-                    break;
-                case THIRD_CHOICE:
+                }
+                case THIRD_CHOICE -> {
                     System.out.println("Chỉnh sửa Mật Khẩu thành: ");
                     String newPass = scanner.nextLine();
                     account.setPassword(newPass);
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("---------------------------------");
                     System.out.println("Nhập lại lựa chọn 1 >>> 3:");
+                }
             }
         } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);
         fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
@@ -196,28 +195,28 @@ public class AccountManagement {
 
 
 
-    public void removeAccount() throws IOException {
-        System.out.print("Nhập Tên Khách Hàng muốn xóa Tài Khoản: ");
-        String userName = scanner.nextLine();
-        int index = findIndexByUserName(userName);
-        String answer;
-        if (index != -1) {
-            System.out.println("Bạn chắc chắn muốn xóa Tài Khoản: " + accounts.get(index) + "?");
-            do {
-                System.out.print("Nhập lựa chọn để tiếp tục (Y/N) >>> ");
-                answer = scanner.nextLine();
-                if (answer.equals("y")) {
-                    accounts.remove(index);
-                    fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
-                    System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
-                    System.out.println("---------------------------------");
-                }
-            } while (!answer.equals("y") && !answer.equals("n"));
-        } else {
-            System.out.println("Không tồn tại Tài Khoản có tên " + userName);
-            System.out.println("---------------------------------");
-        }
-    }
+//    public void removeAccount() throws IOException {
+//        System.out.print("Nhập Tên Khách Hàng muốn xóa Tài Khoản: ");
+//        String userName = scanner.nextLine();
+//        int index = findIndexByUserName(userName);
+//        String answer;
+//        if (index != -1) {
+//            System.out.println("Bạn chắc chắn muốn xóa Tài Khoản: " + accounts.get(index) + "?");
+//            do {
+//                System.out.print("Nhập lựa chọn để tiếp tục (Y/N) >>> ");
+//                answer = scanner.nextLine();
+//                if (answer.equals("y")) {
+//                    accounts.remove(index);
+//                    fileCsv.writeFileAccount(accounts, USER_FILE_PATH);
+//                    System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
+//                    System.out.println("---------------------------------");
+//                }
+//            } while (!answer.equals("y") && !answer.equals("n"));
+//        } else {
+//            System.out.println("Không tồn tại Tài Khoản có tên " + userName);
+//            System.out.println("---------------------------------");
+//        }
+//    }
 
     public void printUsers(){
         System.out.println("Danh Sách Khách Hàng: ");

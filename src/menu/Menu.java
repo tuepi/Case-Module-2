@@ -10,7 +10,7 @@ public class Menu {
 
     String managementMenu = """
             ===========QUẢN LÝ ĐỒ UỐNG===========
-            1.    HIỂN THỊ DANH SÁCH 
+            1.    HIỂN THỊ DANH SÁCH
             2.    THÊM ĐỒ UỐNG
             3.    SỬA ĐỒ UỐNG
             4.    XÓA ĐỒ UỐNG

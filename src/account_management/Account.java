@@ -4,9 +4,6 @@ public class Account {
     private String userName;
     private String email;
     private String password;
-    private String phoneNumber;
-
-    //thêm số điện thoại
 
     public Account() {
     }
@@ -15,7 +12,6 @@ public class Account {
         this.userName = userName;
         this.email = email;
         this.password = password;
-//        this.phoneNumber = phoneNumber;
     }
 
     public String getUserName() {
@@ -42,21 +38,12 @@ public class Account {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
         return "Account{" +
                 "userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

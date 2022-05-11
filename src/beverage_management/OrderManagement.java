@@ -108,14 +108,9 @@ public class OrderManagement {
         do {
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
-                case FIRST_CHOICE:
-                    size = "Size M";
-                    break;
-                case SECOND_CHOICE:
-                    size = "Size L";
-                    break;
-                default:
-                    System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
+                case FIRST_CHOICE -> size = "Size M";
+                case SECOND_CHOICE -> size = "Size L";
+                default -> System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
             }
         } while (choice != 1 && choice != 2);
         return size;
@@ -130,14 +125,9 @@ public class OrderManagement {
         do {
             choiceOfType = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choiceOfType) {
-                case FIRST_CHOICE:
-                    type = "Nóng";
-                    break;
-                case SECOND_CHOICE:
-                    type = "Lạnh";
-                    break;
-                default:
-                    System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
+                case FIRST_CHOICE -> type = "Nóng";
+                case SECOND_CHOICE -> type = "Lạnh";
+                default -> System.out.println("Vui lòng chọn 1 hoặc 2 !!!");
             }
         } while (choiceOfType != 1 && choiceOfType != 2);
         return type;
@@ -152,20 +142,11 @@ public class OrderManagement {
         do {
             choiceOfSweet = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choiceOfSweet) {
-                case FIRST_CHOICE:
-                    sweet = "Không Ngọt";
-                    break;
-                case SECOND_CHOICE:
-                    sweet = "30% Đường";
-                    break;
-                case THIRD_CHOICE:
-                    sweet = "50% Đường";
-                    break;
-                case FOURTH_CHOICE:
-                    sweet = "70% Đường";
-                    break;
-                default:
-                    System.out.println("Vui lòng chọn 1 >>> 4 !!!");
+                case FIRST_CHOICE -> sweet = "Không Ngọt";
+                case SECOND_CHOICE -> sweet = "30% Đường";
+                case THIRD_CHOICE -> sweet = "50% Đường";
+                case FOURTH_CHOICE -> sweet = "70% Đường";
+                default -> System.out.println("Vui lòng chọn 1 >>> 4 !!!");
             }
         } while (choiceOfSweet < 1 || choiceOfSweet > 4);
         return sweet;
@@ -180,54 +161,50 @@ public class OrderManagement {
             System.out.println("3. Thanh Toán bằng thẻ Ngân hàng.");
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
-                case FIRST_CHOICE:
+                case FIRST_CHOICE -> {
                     System.out.println("--------------------------------");
                     System.out.println("Hãy thanh toán khi nhận được hàng!!!");
                     checkOrder();
                     System.out.println("--------------------------------");
-                    break;
-                case SECOND_CHOICE:
+                }
+                case SECOND_CHOICE -> {
                     System.out.println("--------------------------------");
                     System.out.println("Quý Khách chưa có ví điện tử\nNhập 1 để trả tiền mặt đi nhé !!!");
                     System.out.println("--------------------------------");
-                    break;
-                case THIRD_CHOICE:
+                }
+                case THIRD_CHOICE -> {
                     System.out.println("--------------------------------");
                     System.out.println("Tài khoản của Quý Khách làm gì còn tiền\nNhập 1 để trả tiền mặt đi nhé !!!");
                     System.out.println("--------------------------------");
-                    break;
-                default:
-                    System.out.println("Nhập lại lựa chọn:");
+                }
+                default -> System.out.println("Nhập lại lựa chọn:");
             }
         } while (choice != FIRST_CHOICE);
     }
 
     public void checkOrder() throws Exception {
-        boolean check = false;
         int choice;
         do {
             System.out.println("Mời Xác Nhận: ");
             System.out.println("1. Đặt Giao Hàng\t\t\t2. Xóa Sản Phẩm\t\t\t3. Hủy Đơn");
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
-                case FIRST_CHOICE:
+                case FIRST_CHOICE -> {
                     System.out.println("--------------------------------");
                     System.out.print("Nhập địa chỉ của bạn: ");
                     String address = sc.nextLine();
                     int deliveryTime = (int) ((Math.random() * 20) + 10);
                     System.out.println("ĐẶT HÀNG THÀNH CÔNG!!!");
                     System.out.println("Đơn hàng sẽ được giao đến địa chỉ " + address + " trong " + deliveryTime + " phút nữa !!!");
-                    for (OrderedBeverage o : orderingList) {
-                        orderedList.add(o);
-                    }
+                    orderedList.addAll(orderingList);
                     orderingList.removeAll(orderingList);
                     fileCsv.writeFileOrder(orderedList, ORDER_FILE_PATH);
-                    break;
-                case SECOND_CHOICE:
+                }
+                case SECOND_CHOICE -> {
                     System.out.println("--------------------------------");
                     removeBeverageInOrder();
-                    break;
-                case THIRD_CHOICE:
+                }
+                case THIRD_CHOICE -> {
                     System.out.println("--------------------------------");
                     for (OrderedBeverage o : orderingList) {
                         Beverage beverage = beverageManagement.getBeverages().get(beverageManagement.findById(o.getId()));
@@ -246,13 +223,11 @@ public class OrderManagement {
                             order();
                         }
                         if (answer.equals("n")) {
-//                            check = true;
                             break;
                         }
                     } while (!answer.equals("y"));
-                    break;
-                default:
-                    System.out.println("Nhập lại lựa chọn:");
+                }
+                default -> System.out.println("Nhập lại lựa chọn:");
             }
         } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);
     }

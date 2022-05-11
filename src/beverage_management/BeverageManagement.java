@@ -57,23 +57,12 @@ public class BeverageManagement {
         do {
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
-                case 1:
-                    image = CAFE_IMAGE;
-                    break;
-                case 2:
-                    image = MILK_TEA_IMAGE;
-                    break;
-                case 3:
-                    image = JUICE_IMAGE;
-                    break;
-                case 4:
-                    image = SMOOTHIE_IMAGE;
-                    break;
-                case 5:
-                    image = COCKTAILS_IMAGE;
-                    break;
-                default:
-                    System.out.println("Vui lòng chọn 1 đến 5 !!!");
+                case 1 -> image = CAFE_IMAGE;
+                case 2 -> image = MILK_TEA_IMAGE;
+                case 3 -> image = JUICE_IMAGE;
+                case 4 -> image = SMOOTHIE_IMAGE;
+                case 5 -> image = COCKTAILS_IMAGE;
+                default -> System.out.println("Vui lòng chọn 1 đến 5 !!!");
             }
         } while (choice < 1 || choice > 5);
         return image;
@@ -141,9 +130,9 @@ public class BeverageManagement {
         System.out.print("Nhập Tên Sản Phẩm muốn tìm kiếm: ");
         String name = scanner.nextLine().toLowerCase();
         int count = 0;
+        System.out.println("Sản Phẩm cần tìm là: ");
         for (Beverage b : beverages) {
             if (b.getDrinkName().toLowerCase().contains(name)) {
-                System.out.println("Sản Phẩm cần tìm là: ");
                 System.out.println(b);
                 System.out.println("---------------------------------");
                 count++;
@@ -185,12 +174,7 @@ public class BeverageManagement {
     }
 
     public void sortByPrice(){
-        List<Beverage> sortedBeverages = beverages;
-        Collections.sort(sortedBeverages);
-
-        for (Beverage b : sortedBeverages) {
-            System.out.println(b);
-        }
+        Collections.sort(beverages);
     }
 
 }

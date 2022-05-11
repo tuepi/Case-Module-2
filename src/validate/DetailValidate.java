@@ -4,9 +4,6 @@ public class DetailValidate {
     private String regex;
     private String message;
 
-    public DetailValidate() {
-    }
-
     public DetailValidate(String regex, String message) {
         this.regex = regex;
         this.message = message;

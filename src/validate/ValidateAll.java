@@ -10,6 +10,7 @@ public class ValidateAll {
         Matcher matcher = pattern.matcher(string);
         if (!matcher.matches()){
             System.out.println(detailValidate.getMessage());
+            System.out.println("---------------------------------");
         }
         return matcher.matches();
     }
