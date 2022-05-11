@@ -46,9 +46,7 @@ public class HandleMenu {
                     System.out.println("CẢM ƠN VÀ HẸN GẶP LẠI QUÝ KHÁCH!!!");
                     System.exit(0);
                 }
-                default -> {
-                    System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");
-                }
+                default -> System.out.println("Yêu cầu lựa chọn từ 0 > 2 : ");
             }
         } while (choice < 0 || choice > 2);
 

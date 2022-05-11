@@ -37,7 +37,7 @@ public class OrderManagement {
     public void order() throws Exception {
         boolean check = false;
         do {
-
+            fileCsv.readFileBeverage(beverageManagement.getBeverages(),"src\\data_file\\beverage.csv");
             int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm mà bạn muốn đặt hàng: ");
             int index = beverageManagement.findById(id);
             if (index != -1) {
