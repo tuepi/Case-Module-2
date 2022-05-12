@@ -15,16 +15,16 @@ public class FileCsv {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
             list.clear();
+            if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
-                    if (scanner.nextLine() != null) {
                     String out = scanner.nextLine();
                     String[] arr = out.split(",");
                     Beverage beverage = new Beverage(arr[1], arr[2], Double.parseDouble(arr[3]), Integer.parseInt(arr[4]));
                     beverage.setId(list.size() + 1);
                     list.add(beverage);
-                }else {
-                        throw new Exception();
-                    }
+                }
+            } else {
+                throw new Exception();
             }
         return list;
     }
@@ -51,16 +51,16 @@ public class FileCsv {
         FileReader fileReader = new FileReader(filePath);
         Scanner scanner = new Scanner(fileReader);
         orderedList.clear();
+        if (scanner.nextLine() != null) {
             while (scanner.hasNext()) {
-                if (scanner.nextLine() != null) {
                 String out = scanner.nextLine();
                 String[] arr = out.split(",");
                 Account account = accountManagement.findByUserName(arr[9]);
                 OrderedBeverage orderedBeverage = new OrderedBeverage(Integer.parseInt(arr[0]), arr[1], arr[2], Double.parseDouble(arr[3]), arr[4], arr[5], arr[6], Integer.parseInt(arr[7]), Double.parseDouble(arr[8]), account);
                 orderedList.add(orderedBeverage);
-            } else {
-                    throw new Exception();
-                }
+            }
+        } else {
+            throw new Exception();
         }
         return orderedList;
     }
@@ -90,15 +90,15 @@ public class FileCsv {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
             list.clear();
+            if (scanner.nextLine() != null) {
                 while (scanner.hasNext()) {
-                    if (scanner.nextLine() != null) {
                     String out = scanner.nextLine();
                     String[] arr = out.split(",");
                     Account account = new Account(arr[0], arr[1], arr[2]);
                     list.add(account);
-                } else {
-                        throw new Exception();
-                    }
+                }
+            } else {
+                throw new Exception();
             }
         return list;
     }
