@@ -186,7 +186,7 @@ public class OrderManagement {
         int choice;
         do {
             System.out.println("Mời Xác Nhận: ");
-            System.out.println("1. Đặt Giao Hàng\t\t\t2. Xóa Sản Phẩm\t\t\t3. Hủy Đơn");
+            System.out.println("1. Đặt Giao Hàng\t\t\t2. Thay Sản Phẩm\t\t\t3. Hủy Đơn");
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
                 case FIRST_CHOICE -> {
@@ -202,7 +202,8 @@ public class OrderManagement {
                 }
                 case SECOND_CHOICE -> {
                     System.out.println("--------------------------------");
-                    removeBeverageInOrder();
+                    changeBeverageInOrder();
+
                 }
                 case THIRD_CHOICE -> {
                     System.out.println("--------------------------------");
@@ -232,17 +233,16 @@ public class OrderManagement {
         } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);
     }
 
-    public void removeBeverageInOrder() throws Exception {
-        int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm cần xóa trong đơn: ");
+    public void changeBeverageInOrder() throws Exception {
+        int id = exceptionHandling.checkInputOfInteger("Nhập ID Sản Phẩm cần thay trong đơn: ");
         int index = findByIdForOrder(id);
         if (index != -1) {
-            System.out.println("Sản phẩm " + orderingList.get(index));
+            System.out.println("Sản Phẩm Cần Thay: " + orderingList.get(index));
+            System.out.println("Hãy Đặt thêm Sản Phẩm mới >>> ");
             Beverage beverage = beverageManagement.getBeverages().get(beverageManagement.findById(id));
             beverage.setQuantity(beverage.getQuantity() + orderingList.get(index).getOrderQuanity());
             orderingList.remove(index);
             fileCsv.writeFileBeverage(beverageManagement.getBeverages(), "src\\data_file\\beverage.csv");
-            System.out.println("ĐÃ XÓA THÀNH CÔNG!!!");
-            System.out.println("---------------------------------");
         } else {
             System.out.println("Không tồn tại Sản Phẩm có ID = " + id + " trong đơn hàng!");
             System.out.println("---------------------------------");
@@ -260,7 +260,6 @@ public class OrderManagement {
 
 
     public void printOrderedMany() {
-        // thứ tự đơn hàng và số lượng đã được đặt
     }
 
 

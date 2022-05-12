@@ -141,9 +141,8 @@ public class AccountManagement {
     public void updateAccount() throws IOException {
         System.out.println("---------------------------------");
         System.out.println("Quý Khách muốn chỉnh sửa thông tin nào? ");
-        System.out.println("1. Tên Tài Khoản\t\t\t2. Số Điện Thoại\t\t\t3. Mật Khẩu");
+        System.out.println("1. Tên Tài Khoản\t\t\t2. Mật Khẩu");
         int choice;
-
         do {
             choice = exceptionHandling.checkInputOfInteger("Nhập lựa chọn >>> ");
             switch (choice) {
@@ -153,18 +152,13 @@ public class AccountManagement {
                     account.setUserName(newUserName);
                 }
                 case SECOND_CHOICE -> {
-                    System.out.println("Chỉnh sửa Số Điện Thoại thành: ");
-                    String newPhoneNumber = scanner.nextLine();
-                    account.setPassword(newPhoneNumber);
-                }
-                case THIRD_CHOICE -> {
                     System.out.println("Chỉnh sửa Mật Khẩu thành: ");
                     String newPass = scanner.nextLine();
                     account.setPassword(newPass);
                 }
                 default -> {
                     System.out.println("---------------------------------");
-                    System.out.println("Nhập lại lựa chọn 1 >>> 3:");
+                    System.out.println("Nhập lại lựa chọn 1 hoặc 2:");
                 }
             }
         } while (choice < FIRST_CHOICE || choice > THIRD_CHOICE);

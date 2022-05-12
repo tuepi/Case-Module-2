@@ -1,22 +1,17 @@
 ID,TÊN,IMAGE,ĐƠN GIÁ(SIZE M),SIZE,KIỂU,ĐỘ NGỌT,SỐ LƯỢNG,TỔNG(kVNĐ),TÊN KHÁCH HÀNG
 3,Bạc Xỉu,☕,30.0,Size M,Lạnh,Ngọt,20,600.0,Khách VIP
 1,Cafe Đen,☕,20.0,Size M,Lạnh,Ngọt,20,400.0,Khách VIP
-3,Bạc Xỉu,☕,30.0,Size L,Lạnh,Ngọt,20,900.0,Khách VIP
-1,Cafe Đen,☕,20.0,Size L,Lạnh,Ngọt,2,60.0,Khách VIP
 6,Trà Đào,🍹,30.0,Size L,Lạnh,Ngọt,2,90.0,Hưng Hydra
 7,Trà Sữa Chân Trâu,🧋,50.0,Size L,Lạnh,Không Ngọt,3,225.0,Ông Thọ
-8,Capuchino,🍵,40.0,Size L,Lạnh,Không Ngọt,2,120.0,Khách VIP
 7,Trà Sữa Chân Trâu,🧋,50.0,Size M,Lạnh,50% Đường,5,250.0,Ông Thọ
 8,Capuchino,🍵,40.0,Size L,Lạnh,30% Đường,5,300.0,Cô Gái Hà Lan
-6,Trà Đào,🍹,30.0,Size L,Lạnh,50% Đường,3,135.0,Phạm Nhật Vượng
 2,Cafe Sữa,☕,30.0,Size L,Lạnh,30% Đường,5,225.0,Phạm Nhật Vượng
-2,Cafe Sữa,☕,30.0,Size L,Lạnh,50% Đường,7,315.0,Ông Thọ
-8,Capuchino,🍵,40.0,Size L,Lạnh,30% Đường,3,180.0,hungtran1
-8,Capuchino,🍵,40.0,Size L,Lạnh,30% Đường,3,180.0,hungtran1
 6,Trà Đào,🍹,30.0,Size M,Lạnh,30% Đường,2,60.0,hungtran1
 7,Trà Sữa Chân Trâu,🧋,50.0,Size L,Lạnh,30% Đường,8,600.0,Sếp Kiên
 8,Capuchino,🍵,40.0,Size M,Nóng,30% Đường,1,40.0,Sếp Kiên
 1,Cafe Đen,☕,20.0,Size L,Lạnh,Không Ngọt,4,120.0,anhnam
-5,Trà Chanh,🍹,15.0,Size M,Nóng,30% Đường,2,30.0,Sếp Kiên
 2,Cafe Sữa,☕,30.0,Size L,Lạnh,70% Đường,3,135.0,Sếp Kiên
 7,Trà Sữa Chân Trâu,🧋,50.0,Size L,Lạnh,30% Đường,5,375.0,hung
+12,Sinh Tố Xoài,🥛,35.0,Size M,Lạnh,70% Đường,2,70.0,Khách VIP
+1,Cafe Đen,☕,20.0,Size M,Nóng,Không Ngọt,1,20.0,Khách VIP
+3,Bạc Xỉu,☕,30.0,Size L,Lạnh,70% Đường,2,90.0,Phạm Nhật Vượng
